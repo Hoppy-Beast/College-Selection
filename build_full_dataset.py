@@ -63,6 +63,10 @@ for raw_board_key, board_obj in raw_data.items():
             continue
         seen_eiins.add(eiin)
 
+        # Exclude SOS HERMANN GMEINER COLLEGE (EIIN: 108215) per user request
+        if eiin == "108215" or "HERMANN" in name or "GMEINER" in name:
+            continue
+
         # Determine stats
         if eiin in BENCHMARKS:
             bm = BENCHMARKS[eiin]
