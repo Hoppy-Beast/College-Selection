@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Bangladesh HSC College Selection - Editorial 2-Click Multi-Sort Edition (v4.0)
+   Bangladesh HSC College Selection - Editorial 2-Click Multi-Sort Edition (v4.3)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,12 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     group: 'all'
   };
 
-  // Multi-Sort Priority List (Average GPA-5 Rate as top priority!)
-  let activeSorts = [
-    { key: 'gpa5_rate', label: 'Average GPA-5 Rate (%)', dir: 'desc' },
-    { key: 'gpa5_count', label: 'GPA-5 Total Count', dir: 'desc' },
-    { key: 'pass_rate', label: 'Pass Rate (%)', dir: 'desc' }
-  ];
+  // Multi-Sort Priority List (Default EMPTY - no sorting applied until user clicks!)
+  let activeSorts = [];
 
   const availableSorts = [
     { key: 'gpa5_rate', label: 'Average GPA-5 Rate (%)', dir: 'desc' },
@@ -225,12 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // RESET PRIORITY BUTTON: Clears all active sort priorities to []
     resetSortBtn.addEventListener('click', () => {
-      activeSorts = [
-        { key: 'gpa5_rate', label: 'Average GPA-5 Rate (%)', dir: 'desc' },
-        { key: 'gpa5_count', label: 'GPA-5 Total Count', dir: 'desc' },
-        { key: 'pass_rate', label: 'Pass Rate (%)', dir: 'desc' }
-      ];
+      activeSorts = [];
       renderMultiSortChips();
       if (hasUserInteracted) applyFiltersAndRender();
     });
@@ -293,7 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function applyFiltersAndRender() {
-    let result = collegesData;
+    // Clone array to prevent mutating master dataset
+    let result = [...collegesData];
 
     if (state.board !== 'ALL') {
       result = result.filter(c => c.board === state.board);
@@ -318,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     }
 
-    // Multi-Sort Comparator
+    // Apply Multi-Sort Comparator ONLY if activeSorts is non-empty!
     if (activeSorts.length > 0) {
       result.sort((a, b) => {
         for (const sortObj of activeSorts) {
