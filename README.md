@@ -22,7 +22,7 @@ An editorial, high-performance web platform designed and owned by **MD. Mahinur 
 - **2-Click Multi-Sort Toggle Engine**: Click any metric pill once to turn it **ON** (add to priority ranks 1st, 2nd, 3rd) and click again to turn it **OFF**. 2 clicks maximum!
 - **Human Non-AI Editorial Design**: Designed using **Space Grotesk** headings, sharp structural boundaries, high-contrast dark carbon theme, and zero emojis.
 - **Fahad's Tutorial Marketing Callout**: Features a dedicated marketing card with direct links to [Fahad's Tutorial Platform](https://ft.education/).
-- **Nationwide Coverage (2,750+ Colleges)**: Complete coverage across all 11 Education Boards in Bangladesh.
+- **Nationwide Coverage (8,500+ Audited Colleges)**: Complete coverage across all 11 Education Boards (Dhaka, Rajshahi, Chittagong, Comilla, Sylhet, Barisal, Dinajpur, Jessore, Mymensingh, Madrasah, Technical) in Bangladesh.
 
 ---
 
