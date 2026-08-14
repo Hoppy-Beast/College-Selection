@@ -28,6 +28,7 @@ BENCHMARKS = {
     "130452": {"name": "MURARI CHAND (MC) COLLEGE SYLHET", "total": 1900, "pass_rate": 98.5, "gpa5": 980, "sc_pass": 99.1, "sc_gpa5": 740, "cm_pass": 97.6, "cm_gpa5": 170, "hu_pass": 96.8, "hu_gpa5": 70},
 }
 
+# All Boards
 board_name_map = {
     "dhaka": "DHAKA",
     "rajshahi": "RAJSHAHI",
