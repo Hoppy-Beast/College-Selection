@@ -26,6 +26,7 @@ BENCHMARKS = {
     "104532": {"name": "CHITTAGONG COLLEGE", "total": 1800, "pass_rate": 99.4, "gpa5": 1420, "sc_pass": 99.7, "sc_gpa5": 1100, "cm_pass": 98.8, "cm_gpa5": 250, "hu_pass": 98.0, "hu_gpa5": 70},
     "105824": {"name": "COMILLA VICTORIA GOVT. COLLEGE", "total": 2400, "pass_rate": 98.1, "gpa5": 1250, "sc_pass": 98.8, "sc_gpa5": 920, "cm_pass": 97.2, "cm_gpa5": 240, "hu_pass": 96.8, "hu_gpa5": 90},
     "130452": {"name": "MURARI CHAND (MC) COLLEGE SYLHET", "total": 1900, "pass_rate": 98.5, "gpa5": 980, "sc_pass": 99.1, "sc_gpa5": 740, "cm_pass": 97.6, "cm_gpa5": 170, "hu_pass": 96.8, "hu_gpa5": 70},
+    "104662": {"name": "NIZAMPUR GOVERNMENT COLLEGE", "total": 956, "pass_rate": 27.41, "gpa5": 11, "sc_pass": 35.33, "sc_gpa5": 3, "cm_pass": 32.86, "cm_gpa5": 7, "hu_pass": 19.34, "hu_gpa5": 1},
 }
 
 # All Boards
