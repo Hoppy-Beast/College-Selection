@@ -1027,7 +1027,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let dhakaCurrentPage = 1;
   let dhakaEntriesPerPage = 20;
-
   const dhakaState = {
     searchQuery: '',
     gpa: null,
@@ -1038,7 +1037,7 @@ document.addEventListener('DOMContentLoaded', () => {
     group: 'ALL',
     shift: 'ALL',
     medium: 'ALL',
-    sort: 'seat_desc'
+    sort: 'gpa_desc'
   };
 
   // DOM References (Dhaka Special)
@@ -1085,7 +1084,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) {
         throw new Error(`Failed to load Dhaka Board dataset (${response.status} ${response.statusText})`);
       }
-      dhakaCollegesData = await response.json();
+      const rawDhaka = await response.json();
+
+      // Hardcoded Exclusion: Never display Hermann Gmeiner / SOS Hermann Gmeiner / EIIN 108215
+      dhakaCollegesData = rawDhaka.filter(c => {
+        if (!c) return false;
+        const eiin = String(c.eiin || '').trim();
+        const name = String(c.name || '').toUpperCase();
+        if (eiin === '108215' || name.includes('HERMANN') || name.includes('GMEINER')) {
+          return false;
+        }
+        return true;
+      });
+
       isDhakaInitialized = true;
 
       populateDhakaDistricts();
@@ -1142,50 +1153,45 @@ document.addEventListener('DOMContentLoaded', () => {
       debouncedDhakaSearch(e.target.value);
     });
 
-    // GPA Input Handling
-    const debouncedGpaInput = debounce((val) => {
-      if (val === '' || isNaN(val)) {
-        dhakaState.gpa = null;
-        dhakaGpaClearBtn.style.display = 'none';
-        gpaStatusFeedback.textContent = 'No GPA Entered';
-        gpaStatusFeedback.classList.remove('active-gpa');
-      } else {
-        const num = parseFloat(parseFloat(val).toFixed(2));
-        dhakaState.gpa = Math.max(0, Math.min(5, num));
-        dhakaGpaClearBtn.style.display = 'block';
-        gpaStatusFeedback.textContent = `GPA ${dhakaState.gpa.toFixed(2)} Active`;
-        gpaStatusFeedback.classList.add('active-gpa');
-      }
-      updateActiveGpaChips();
-      dhakaCurrentPage = 1;
-      applyDhakaFiltersAndRender();
-    }, 150);
-
     dhakaGpaInput.addEventListener('input', (e) => {
-      debouncedGpaInput(e.target.value);
+      const val = parseFloat(e.target.value);
+      if (!isNaN(val) && val >= 0.0 && val <= 5.0) {
+        dhakaState.gpa = parseFloat(val.toFixed(2));
+        dhakaState.sort = 'gpa_desc';
+        dhakaSortFilter.value = 'gpa_desc';
+      } else {
+        dhakaState.gpa = null;
+      }
+      dhakaCurrentPage = 1;
+      updateGpaStatusFeedback();
+      updateActiveGpaChips();
+      applyDhakaFiltersAndRender();
     });
 
     dhakaGpaClearBtn.addEventListener('click', () => {
       dhakaGpaInput.value = '';
       dhakaState.gpa = null;
-      dhakaGpaClearBtn.style.display = 'none';
-      gpaStatusFeedback.textContent = 'No GPA Entered';
-      gpaStatusFeedback.classList.remove('active-gpa');
-      updateActiveGpaChips();
       dhakaCurrentPage = 1;
+      updateGpaStatusFeedback();
+      updateActiveGpaChips();
       applyDhakaFiltersAndRender();
     });
 
     dhakaGpaChips.forEach(chip => {
       chip.addEventListener('click', () => {
-        const val = chip.dataset.gpa;
-        dhakaGpaInput.value = val;
-        dhakaState.gpa = parseFloat(val);
-        dhakaGpaClearBtn.style.display = 'block';
-        gpaStatusFeedback.textContent = `GPA ${dhakaState.gpa.toFixed(2)} Active`;
-        gpaStatusFeedback.classList.add('active-gpa');
-        updateActiveGpaChips();
+        const val = parseFloat(chip.dataset.gpa);
+        if (dhakaState.gpa === val) {
+          dhakaState.gpa = null;
+          dhakaGpaInput.value = '';
+        } else {
+          dhakaState.gpa = val;
+          dhakaGpaInput.value = val.toFixed(2);
+          dhakaState.sort = 'gpa_desc';
+          dhakaSortFilter.value = 'gpa_desc';
+        }
         dhakaCurrentPage = 1;
+        updateGpaStatusFeedback();
+        updateActiveGpaChips();
         applyDhakaFiltersAndRender();
       });
     });
@@ -1315,28 +1321,37 @@ document.addEventListener('DOMContentLoaded', () => {
     dhakaState.group = 'ALL';
     dhakaState.shift = 'ALL';
     dhakaState.medium = 'ALL';
-    dhakaState.sort = 'seat_desc';
+    dhakaState.sort = 'gpa_desc';
 
     dhakaSearchInput.value = '';
     dhakaGpaInput.value = '';
-    dhakaGpaClearBtn.style.display = 'none';
-    gpaStatusFeedback.textContent = 'No GPA Entered';
-    gpaStatusFeedback.classList.remove('active-gpa');
     dhakaOnlyEligibleToggle.checked = false;
     dhakaDistrictFilter.value = 'ALL';
-    populateDhakaThanas();
     dhakaThanaFilter.value = 'ALL';
     dhakaGenderFilter.value = 'ALL';
     dhakaGroupFilter.value = 'ALL';
     dhakaShiftFilter.value = 'ALL';
     dhakaMediumFilter.value = 'ALL';
-    dhakaSortFilter.value = 'seat_desc';
+    dhakaSortFilter.value = 'gpa_desc';
+    dhakaEntriesPerPageSelect.value = '20';
+    dhakaEntriesPerPage = 20;
+    dhakaCurrentPage = 1;
 
+    populateDhakaThanas();
+    updateGpaStatusFeedback();
     updateActiveGpaChips();
     syncDhakaGroupTabs('ALL');
-
-    dhakaCurrentPage = 1;
     applyDhakaFiltersAndRender();
+  }
+
+  function updateGpaStatusFeedback() {
+    if (dhakaState.gpa === null) {
+      gpaStatusFeedback.textContent = 'Enter your GPA to evaluate requirements';
+      gpaStatusFeedback.className = 'gpa-feedback-pill';
+    } else {
+      gpaStatusFeedback.textContent = `Candidate GPA: ${dhakaState.gpa.toFixed(2)} (Evaluating 2025 Benchmarks)`;
+      gpaStatusFeedback.className = 'gpa-feedback-pill active';
+    }
   }
 
   function scrollToTopDhaka() {
@@ -1414,16 +1429,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sorting
     result.sort((a, b) => {
       switch (dhakaState.sort) {
-        case 'seat_desc':
-          return b.total_seat - a.total_seat || a.name.localeCompare(b.name);
-        case 'gpa_asc':
-          return a.min_gpa_lowest - b.min_gpa_lowest || b.total_seat - a.total_seat;
         case 'gpa_desc':
-          return b.min_gpa_lowest - a.min_gpa_lowest || b.total_seat - a.total_seat;
+          // Top to Low GPA: Colleges with highest minimum GPA requirements first
+          return (b.min_gpa_highest - a.min_gpa_highest) || (b.min_gpa_lowest - a.min_gpa_lowest) || (b.total_seat - a.total_seat) || a.name.localeCompare(b.name);
+        case 'gpa_asc':
+          // Low to Top GPA: Colleges with lowest minimum GPA requirements first
+          return (a.min_gpa_lowest - b.min_gpa_lowest) || (a.min_gpa_highest - b.min_gpa_highest) || (b.total_seat - a.total_seat) || a.name.localeCompare(b.name);
+        case 'seat_desc':
+          return (b.total_seat - a.total_seat) || a.name.localeCompare(b.name);
         case 'name_asc':
           return a.name.localeCompare(b.name);
         default:
-          return b.total_seat - a.total_seat;
+          return (b.min_gpa_highest - a.min_gpa_highest) || (b.total_seat - a.total_seat);
       }
     });
 
@@ -1509,7 +1526,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Min GPA display range
       const gpaDisplay = college.min_gpa_lowest === college.min_gpa_highest 
         ? `GPA ${college.min_gpa_lowest.toFixed(2)}` 
-        : `GPA ${college.min_gpa_lowest.toFixed(2)} – ${college.min_gpa_highest.toFixed(2)}`;
+        : `GPA ${college.min_gpa_lowest.toFixed(2)} &ndash; ${college.min_gpa_highest.toFixed(2)}`;
 
       // Calculate candidate eligibility if GPA is provided
       let eligibilityAlertHtml = '';

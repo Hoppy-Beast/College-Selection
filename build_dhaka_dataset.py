@@ -31,6 +31,11 @@ def build_dhaka_dataset():
         eiin = str(int(r[0])) if isinstance(r[0], (int, float)) else str(r[0]).strip()
         name = html.unescape(str(r[1])).strip()
         name = " ".join(name.split())
+
+        # Hardcoded Exclusion: Never display Hermann Gmeiner / SOS Hermann Gmeiner / EIIN 108215
+        if eiin == '108215' or 'HERMANN' in name.upper() or 'GMEINER' in name.upper():
+            continue
+
         thana = str(r[2]).strip().title()
         zilla = str(r[3]).strip().title()
         gender = str(r[4]).strip()

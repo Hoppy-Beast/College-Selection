@@ -47103,37 +47103,6 @@
     ]
   },
   {
-    "eiin": "108215",
-    "name": "S O S HERMANN GMEINER COLLEGE",
-    "thana": "Mirpur",
-    "zilla": "Dhaka Mahanagari",
-    "total_seat": 150,
-    "min_gpa_lowest": 5.0,
-    "min_gpa_highest": 5.0,
-    "shifts": [
-      "MORNING"
-    ],
-    "genders": [
-      "Combined"
-    ],
-    "mediums": [
-      "BANGLA"
-    ],
-    "groups": [
-      "Science"
-    ],
-    "offers": [
-      {
-        "group": "Science",
-        "medium": "BANGLA",
-        "shift": "MORNING",
-        "gender": "Combined",
-        "min_gpa": 5.0,
-        "total_seat": 150
-      }
-    ]
-  },
-  {
     "eiin": "110292",
     "name": "S.R.D SHAMS UDDIN BHUIYAN SCHOOL & COLLEGE",
     "thana": "Hossainpur",
