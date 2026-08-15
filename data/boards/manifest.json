@@ -1,0 +1,215 @@
+{
+  "total_colleges": 7473,
+  "boards": {
+    "COMILLA": {
+      "code": "COMILLA",
+      "filename": "comilla.json",
+      "count": 455,
+      "size_kb": 336.8,
+      "districts": [
+        "BRAHMANBARIA",
+        "CHANDPUR",
+        "COMILLA",
+        "FENI",
+        "LAXMIPUR",
+        "NOAKHALI"
+      ]
+    },
+    "RAJSHAHI": {
+      "code": "RAJSHAHI",
+      "filename": "rajshahi.json",
+      "count": 754,
+      "size_kb": 553.4,
+      "districts": [
+        "BOGURA",
+        "JOYPURHAT",
+        "NAOGAON",
+        "NATORE",
+        "NAWABGANJ",
+        "PABNA",
+        "RAJSHAHI",
+        "SIRAJGANJ"
+      ]
+    },
+    "BARISAL": {
+      "code": "BARISAL",
+      "filename": "barisal.json",
+      "count": 349,
+      "size_kb": 256.4,
+      "districts": [
+        "BARGUNA",
+        "BARISHAL",
+        "BHOLA",
+        "JHALAKATI",
+        "PATUAKHALI",
+        "PIROJPUR"
+      ]
+    },
+    "CHITTAGONG": {
+      "code": "CHITTAGONG",
+      "filename": "chittagong.json",
+      "count": 281,
+      "size_kb": 208.2,
+      "districts": [
+        "BANDARBAN",
+        "CHATTOGRAM",
+        "COX'S BAZAR",
+        "KHAGRACHHARI",
+        "RANGAMATI"
+      ]
+    },
+    "SYLHET": {
+      "code": "SYLHET",
+      "filename": "sylhet.json",
+      "count": 323,
+      "size_kb": 237.4,
+      "districts": [
+        "HABIGANJ",
+        "MOULVIBAZAR",
+        "SUNAMGANJ",
+        "SYLHET"
+      ]
+    },
+    "JESSORE": {
+      "code": "JESSORE",
+      "filename": "jessore.json",
+      "count": 575,
+      "size_kb": 420.3,
+      "districts": [
+        "BAGERHAT",
+        "CHUADANGA",
+        "JASHORE",
+        "JHENAIDAH",
+        "KHULNA",
+        "KUSHTIA",
+        "MAGURA",
+        "MEHERPUR",
+        "NARAIL",
+        "SATKHIRA"
+      ]
+    },
+    "MYMENSINGH": {
+      "code": "MYMENSINGH",
+      "filename": "mymensingh.json",
+      "count": 306,
+      "size_kb": 225.1,
+      "districts": [
+        "JAMALPUR",
+        "MYMENSINGH",
+        "NETRAKONA",
+        "SHERPUR"
+      ]
+    },
+    "DHAKA": {
+      "code": "DHAKA",
+      "filename": "dhaka.json",
+      "count": 1076,
+      "size_kb": 792.9,
+      "districts": [
+        "DHAKA",
+        "DHAKA MAHANAGARI",
+        "FARIDPUR",
+        "FOREIGN",
+        "GAZIPUR",
+        "GOPALGANJ",
+        "KISHOREGANJ",
+        "MADARIPUR",
+        "MANIKGANJ",
+        "MUNSHIGANJ",
+        "NARAYANGANJ",
+        "NARSINGDI",
+        "RAJBARI",
+        "SHARIATPUR",
+        "TANGAIL"
+      ]
+    },
+    "DINAJPUR": {
+      "code": "DINAJPUR",
+      "filename": "dinajpur.json",
+      "count": 667,
+      "size_kb": 490.4,
+      "districts": [
+        "DINAJPUR",
+        "GAIBANDHA",
+        "KURIGRAM",
+        "LALMONIRHAT",
+        "NILPHAMARI",
+        "PANCHAGARH",
+        "RANGPUR",
+        "THAKURGAON"
+      ]
+    },
+    "MADRASAH": {
+      "code": "MADRASAH",
+      "filename": "madrasah.json",
+      "count": 2687,
+      "size_kb": 1964.8,
+      "districts": [
+        "BAGERHAT",
+        "BANDARBAN",
+        "BARGUNA",
+        "BARISHAL",
+        "BHOLA",
+        "BOGURA",
+        "BRAHAMANBARIA",
+        "CHANDPUR",
+        "CHAPAINABABGANJ",
+        "CHATTOGRAM",
+        "CHUADANGA",
+        "COX'S BAZAR",
+        "CUMILLA",
+        "DHAKA",
+        "DINAJPUR",
+        "FARIDPUR",
+        "FENI",
+        "GAIBANDHA",
+        "GAZIPUR",
+        "GOPALGANJ",
+        "HABIGANJ",
+        "JAMALPUR",
+        "JASHORE",
+        "JHALOKATHI",
+        "JHENAIDAH",
+        "JOYPURHAT",
+        "KHAGRACHHARI",
+        "KHULNA",
+        "KISHORGANJ",
+        "KURIGRAM",
+        "KUSHTIA",
+        "LALMONIRHAT",
+        "LAXMIPUR",
+        "MADARIPUR",
+        "MAGURA",
+        "MANIKGANJ",
+        "MEHERPUR",
+        "MOULAVIBAZAR",
+        "MUNSHIGANJ",
+        "MYMENSINGH",
+        "NAOGAON",
+        "NARAYANGANJ",
+        "NATORE",
+        "NETRAKONA",
+        "NILFAMARI",
+        "NOAKHALI",
+        "NORAIL",
+        "NORSINGDI",
+        "PABNA",
+        "PANCHAGAR",
+        "PATUAKHALI",
+        "PIROJPUR",
+        "RAJBARI",
+        "RAJSHAHI",
+        "RANGAMATI",
+        "RANGPUR",
+        "SATKHIRA",
+        "SHARIATPUR",
+        "SHERPUR",
+        "SIRAJGANJ",
+        "SUNAMGANJ",
+        "SYLHET",
+        "TANGAIL",
+        "THAKURGAON"
+      ]
+    }
+  }
+}

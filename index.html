@@ -8,7 +8,7 @@
   <title>SSC-26 HSC College Selection Guide — Designed & Developed by Prachurza</title>
   <meta name="title" content="SSC-26 HSC College Selection Guide — Designed & Developed by Prachurza">
   <meta name="description" content="Editorial HSC College Selection & Analytics Guide for SSC-26 students in Bangladesh. Designed & Developed by MD. Mahinur Rahman Prachurza (Prachurza) for Fahad's Tutorial (FT) students.">
-  <meta name="keywords" content="HSC College Admission 2026, SSC-26 College Guide, Fahad's Tutorial, FT Education, Prachurza, MD. Mahinur Rahman Prachurza, Education Board Results, College Analytics">
+  <meta name="keywords" content="HSC College Admission 2026, SSC-26 College Guide, Fahad's Tutorial, FT Education, Prachurza, MD. Mahinur Rahman Prachurza, Education Board Results, College Analytics, Dhaka Board 2025 Seat List, Dhaka XI Admission Requirements">
   <meta name="author" content="MD. Mahinur Rahman Prachurza (Prachurza)">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#080b11">
@@ -19,12 +19,12 @@
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
 
-  <!-- Open Graph / Facebook Meta Tags (Optimized for Facebook thumbnail previews) -->
+  <!-- Open Graph / Facebook Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hoppy-beast.github.io/College-Selection/">
   <meta property="og:site_name" content="HSC College Selection Guide — Designed & Developed by Prachurza">
   <meta property="og:title" content="HSC College Selection Guide — Designed & Developed by Prachurza">
-  <meta property="og:description" content="Editorial academic performance analytics covering 7,400+ HSC colleges across all 10 Education Boards in Bangladesh based on official Education Board results.">
+  <meta property="og:description" content="Editorial academic performance analytics covering 7,400+ HSC colleges across all 10 Education Boards in Bangladesh and Dhaka Board Class XI previous year (2025) minimum GPA cutoff benchmark.">
   <meta property="og:image" content="https://hoppy-beast.github.io/College-Selection/assets/preview.png">
   <meta property="og:image:secure_url" content="https://hoppy-beast.github.io/College-Selection/assets/preview.png">
   <meta property="og:image:type" content="image/png">
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://hoppy-beast.github.io/College-Selection/">
   <meta name="twitter:title" content="HSC College Selection Guide — Designed & Developed by Prachurza">
-  <meta name="twitter:description" content="Editorial academic performance analytics covering 7,400+ HSC colleges across all 10 Education Boards in Bangladesh.">
+  <meta name="twitter:description" content="Editorial academic performance analytics covering 7,400+ HSC colleges and Dhaka Board Class XI previous year requirements benchmark.">
   <meta name="twitter:image" content="https://hoppy-beast.github.io/College-Selection/assets/preview.png">
   <meta name="twitter:image:alt" content="HSC College Selection Guide Portal Preview">
 
@@ -74,7 +74,6 @@
     <!-- Left-Aligned Editorial Hero Header -->
     <header class="app-header">
       <div class="hero-brand-header">
-        
         <div>
           <div class="header-tag">
             <span class="tag-square"></span>
@@ -87,7 +86,7 @@
       </div>
 
       <p class="app-subtitle">
-        An asymmetric, data-backed academic guide covering <strong>7,400+ HSC Colleges & Madrasahs</strong> across all 64 districts in Bangladesh. Built for <strong>SSC-26 graduates</strong> to rank colleges by Average GPA-5 Rates, Pass Rates, and stream performance.
+        An asymmetric, data-backed academic guide covering <strong>7,400+ HSC Colleges & Madrasahs</strong> across all 64 districts in Bangladesh, plus a dedicated <strong>Dhaka Board Class XI (2025) Minimum GPA & Seat Capacity Benchmark</strong> for 1,186 institutions.
       </p>
 
       <!-- Fahad's Tutorial Marketing Callout Banner -->
@@ -106,180 +105,499 @@
       </div>
     </header>
 
-    <!-- DEFAULT LANDING WELCOME & GUIDELINES SECTION -->
-    <section id="welcomeSection" class="welcome-hero">
-      <div class="editorial-welcome-card">
-        
-        <div class="welcome-header-row">
-          <div>
-            <span class="section-kicker">ADMISSION DIRECTORY</span>
-            <h2 class="welcome-title">Welcome SSC-26 Aspirants</h2>
-          </div>
-          <button id="btnExplore" class="btn-primary-explore">
-            <span>Explore College Catalog</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </button>
-        </div>
+    <!-- Top Navigation Mode Switcher -->
+    <nav class="portal-nav-bar" aria-label="Portal Mode Selection">
+      <button id="tabAllBoards" class="nav-mode-btn active" data-mode="all-boards" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span class="nav-btn-text">All Boards HSC Analytics Guide</span>
+        <span class="nav-badge">7,400+ Colleges</span>
+      </button>
 
-        <p class="welcome-text">
-          Selecting your HSC college requires analyzing objective academic output rather than hearsay. This platform ranks colleges using **Average GPA-5 Rates**, **Pass Rates**, and **Stream Breakdown Statistics** compiled directly from official government board result archives.
-        </p>
+      <button id="tabDhakaSpecial" class="nav-mode-btn" data-mode="dhaka-special" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <span class="nav-btn-text">Dhaka Board XI (2025) GPA & Seat Reference</span>
+        <span class="nav-badge highlight-dhaka">2025 Archive</span>
+      </button>
+    </nav>
 
-        <!-- Feature Guide Steps -->
-        <div class="steps-grid">
-          <div class="step-card">
-            <span class="step-num">01</span>
-            <h3 class="step-head">Filter Location</h3>
-            <p class="step-body">Filter by Board, District (Zilla), or Thana (Upazilla) to isolate your local target colleges.</p>
-          </div>
-          <div class="step-card">
-            <span class="step-num">02</span>
-            <h3 class="step-head">2-Click Multi-Sort</h3>
-            <p class="step-body">Click any metric pill once to activate priority (1st, 2nd, 3rd) and click again to turn it OFF.</p>
-          </div>
-          <div class="step-card">
-            <span class="step-num">03</span>
-            <h3 class="step-head">Stream Breakdown</h3>
-            <p class="step-body">Compare exact Pass, GPA-5 (A+), and Fail counts across Science, Business Studies, and Humanities.</p>
-          </div>
-        </div>
-
-        <!-- IMPORTANT CANDIDATE NOTES & DISCLAIMER BOX -->
-        <div class="disclaimer-box">
-          <div class="disclaimer-title-bar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <span>CRITICAL GUIDELINES FOR SSC-26 CANDIDATES</span>
-          </div>
-
-          <ul class="notes-list">
-            <li><strong>Target Audience</strong>: Designed specifically for <strong>SSC-26</strong> candidates preparing their HSC college preference list.</li>
-            <li><strong>Data Source & Baseline</strong>: Statistics are compiled from public Bangladesh Education Board archives based on recent <strong>HSC-25 examination results</strong>.</li>
-            <li><strong>HSC-26 Status</strong>: At this time, <strong>HSC-26 results are NOT yet published</strong>. Past batch performance serves as an academic baseline.</li>
-            <li><strong>Verify Favorites Yourself</strong>: Unintentional errors or data variations may occur. Please double-check your shortlisted favorite colleges with official college authorities.</li>
-            <li><strong>Official Board Result Verification</strong>: You can verify official board result archives directly at <a href="https://www.educationboardresults.gov.bd/v2/home" target="_blank" rel="noopener" class="link-highlight">educationboardresults.gov.bd</a>.</li>
-            <li><strong>Official XI Admission Portal</strong>: Formal application choices and eligibility criteria must be submitted via the official Ministry portal at <strong>xiclassadmission.gov.bd</strong>.</li>
-          </ul>
-
-          <div class="meta-footer-row">
-            <div class="last-updated-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>DATA AUDIT STAMP: AUGUST 14, 2026</span>
+    <!-- =========================================================================
+         MODE 1: ALL BOARDS HSC ACADEMIC PERFORMANCE GUIDE (colleges.json)
+         ========================================================================= -->
+    <div id="allBoardsSection" class="portal-mode-section">
+      
+      <!-- DEFAULT LANDING WELCOME & GUIDELINES SECTION -->
+      <section id="welcomeSection" class="welcome-hero">
+        <div class="editorial-welcome-card">
+          
+          <div class="welcome-header-row">
+            <div>
+              <span class="section-kicker">ADMISSION DIRECTORY</span>
+              <h2 class="welcome-title">Welcome SSC-26 Aspirants</h2>
             </div>
-            <div class="creator-badge">
-              <span>DESIGNED & DEVELOPED BY MD. MAHINUR RAHMAN PRACHURZA (PRACHURZA)</span>
+            <div class="welcome-actions">
+              <button id="btnExplore" class="btn-primary-explore">
+                <span>Explore All Boards Catalog</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+              <button id="btnExploreDhakaHero" class="btn-secondary-explore">
+                <span>Dhaka (2025) Cutoffs & Seats</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </button>
             </div>
           </div>
+
+          <p class="welcome-text">
+            Selecting your HSC college requires analyzing objective academic output rather than hearsay. This platform ranks colleges using **Average GPA-5 Rates**, **Pass Rates**, and **Stream Breakdown Statistics** compiled directly from official government board result archives.
+          </p>
+
+          <!-- Feature Guide Steps -->
+          <div class="steps-grid">
+            <div class="step-card">
+              <span class="step-num">01</span>
+              <h3 class="step-head">Filter Location</h3>
+              <p class="step-body">Filter by Board, District (Zilla), or Thana (Upazilla) to isolate your local target colleges.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">02</span>
+              <h3 class="step-head">2-Click Multi-Sort</h3>
+              <p class="step-body">Click any metric pill once to activate priority (1st, 2nd, 3rd) and click again to turn it OFF.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">03</span>
+              <h3 class="step-head">Stream Breakdown</h3>
+              <p class="step-body">Compare exact Pass, GPA-5 (A+), and Fail counts across Science, Business Studies, and Humanities.</p>
+            </div>
+          </div>
+
+          <!-- IMPORTANT CANDIDATE NOTES & DISCLAIMER BOX -->
+          <div class="disclaimer-box">
+            <div class="disclaimer-title-bar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>CRITICAL GUIDELINES FOR SSC-26 CANDIDATES</span>
+            </div>
+
+            <ul class="notes-list">
+              <li><strong>Target Audience</strong>: Designed specifically for <strong>SSC-26</strong> candidates preparing their HSC college preference list.</li>
+              <li><strong>Data Source & Baseline</strong>: Statistics are compiled from public Bangladesh Education Board archives based on recent <strong>HSC-25 examination results</strong>.</li>
+              <li><strong>HSC-26 Status</strong>: At this time, <strong>HSC-26 results are NOT yet published</strong>. Past batch performance serves as an academic baseline.</li>
+              <li><strong>Verify Favorites Yourself</strong>: Unintentional errors or data variations may occur. Please double-check your shortlisted favorite colleges with official college authorities.</li>
+              <li><strong>Official Board Result Verification</strong>: You can verify official board result archives directly at <a href="https://www.educationboardresults.gov.bd/v2/home" target="_blank" rel="noopener" class="link-highlight">educationboardresults.gov.bd</a>.</li>
+              <li><strong>Official XI Admission Portal</strong>: Formal application choices and eligibility criteria must be submitted via the official Ministry portal at <strong>xiclassadmission.gov.bd</strong>.</li>
+            </ul>
+
+            <div class="meta-footer-row">
+              <div class="last-updated-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>DATA AUDIT STAMP: AUGUST 14, 2026</span>
+              </div>
+              <div class="creator-badge">
+                <span>DESIGNED & DEVELOPED BY MD. MAHINUR RAHMAN PRACHURZA (PRACHURZA)</span>
+              </div>
+            </div>
+          </div>
+
         </div>
+      </section>
 
-      </div>
-    </section>
+      <!-- Filter Control Panel (All Boards) -->
+      <section id="allBoardsFilterSection" class="filter-wrapper">
+        <div class="filter-glass-card">
+          
+          <!-- Search Row -->
+          <div class="search-bar-row">
+            <div class="search-input-group">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="searchInput" class="search-input" placeholder="Search by college name, district, or EIIN code (e.g. Notre Dame, City College, Rajshahi College, 108274)...">
+            </div>
+          </div>
 
-    <!-- Filter Control Panel -->
-    <section class="filter-wrapper">
-      <div class="filter-glass-card">
+          <!-- Filter Options Grid -->
+          <div class="filter-grid">
+            <!-- Board Select -->
+            <div class="custom-select-group highlight-board-select">
+              <label for="boardFilter">Education Board</label>
+              <select id="boardFilter" class="custom-select">
+                <option value="NONE" selected>-- Select an Education Board --</option>
+                <option value="DHAKA">Dhaka Board (1,076 Colleges)</option>
+                <option value="RAJSHAHI">Rajshahi Board (754 Colleges)</option>
+                <option value="CHITTAGONG">Chittagong Board (281 Colleges)</option>
+                <option value="COMILLA">Comilla Board (455 Colleges)</option>
+                <option value="SYLHET">Sylhet Board (323 Colleges)</option>
+                <option value="BARISAL">Barisal Board (349 Colleges)</option>
+                <option value="DINAJPUR">Dinajpur Board (667 Colleges)</option>
+                <option value="JESSORE">Jessore Board (575 Colleges)</option>
+                <option value="MYMENSINGH">Mymensingh Board (306 Colleges)</option>
+                <option value="MADRASAH">Madrasah Board (Alim) (2,687 Institutions)</option>
+                <option value="ALL">All Boards (7,473 Colleges)</option>
+              </select>
+            </div>
+
+            <!-- District Select -->
+            <div class="custom-select-group">
+              <label for="districtFilter">District (Zilla)</label>
+              <select id="districtFilter" class="custom-select">
+                <option value="ALL">All Districts (Select to Filter)</option>
+              </select>
+            </div>
+
+            <!-- Thana Select -->
+            <div class="custom-select-group">
+              <label for="thanaFilter">Thana / Upazilla</label>
+              <select id="thanaFilter" class="custom-select">
+                <option value="ALL">All Thanas</option>
+              </select>
+            </div>
+
+            <!-- Entries Per Page Selector -->
+            <div class="custom-select-group">
+              <label for="entriesPerPage">Entries Per Page</label>
+              <select id="entriesPerPage" class="custom-select">
+                <option value="10">Show 10 Entries</option>
+                <option value="20" selected>Show 20 Entries</option>
+                <option value="50">Show 50 Entries</option>
+                <option value="100">Show 100 Entries</option>
+                <option value="ALL">Show All Entries</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Quick Board Selector Chips Row -->
+          <div class="board-quick-chips-row">
+            <span class="board-chips-label">Quick Select Board:</span>
+            <div class="board-chips-container" id="boardQuickChips">
+              <button type="button" class="board-chip-btn" data-board="DHAKA">Dhaka</button>
+              <button type="button" class="board-chip-btn" data-board="RAJSHAHI">Rajshahi</button>
+              <button type="button" class="board-chip-btn" data-board="CHITTAGONG">Chittagong</button>
+              <button type="button" class="board-chip-btn" data-board="COMILLA">Comilla</button>
+              <button type="button" class="board-chip-btn" data-board="SYLHET">Sylhet</button>
+              <button type="button" class="board-chip-btn" data-board="BARISAL">Barisal</button>
+              <button type="button" class="board-chip-btn" data-board="DINAJPUR">Dinajpur</button>
+              <button type="button" class="board-chip-btn" data-board="JESSORE">Jessore</button>
+              <button type="button" class="board-chip-btn" data-board="MYMENSINGH">Mymensingh</button>
+              <button type="button" class="board-chip-btn" data-board="MADRASAH">Madrasah</button>
+              <button type="button" class="board-chip-btn highlight-all-chip" data-board="ALL">All Boards</button>
+            </div>
+          </div>
+
+          <!-- ENHANCED MULTI-SORT PRIORITY BUILDER -->
+          <div class="multi-sort-section">
+            <div class="multi-sort-header">
+              <div>
+                <h4>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="14" y2="12"></line><line x1="4" y1="18" x2="8" y2="18"></line></svg>
+                  Multi-Sort Priority Builder & Tie-Breaker Pipeline
+                </h4>
+                <p class="multi-sort-hint">
+                  Click a metric to set priority order (1st, 2nd, 3rd...). Click again to toggle Direction (High &darr; / Low &uarr;), or click &times; to remove.
+                </p>
+              </div>
+              <button id="resetSortBtn" class="btn-reset-sort" type="button">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                <span>Reset Priority</span>
+              </button>
+            </div>
+
+            <!-- Active Priority Pipeline Flow Bar -->
+            <div id="activeSortPipeline" class="active-sort-pipeline">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+
+            <!-- Quick Recommended Presets -->
+            <div class="sort-presets-row">
+              <span class="preset-title">Popular Combos:</span>
+              <button type="button" class="btn-sort-preset" data-preset="excellence">🌟 Academic Excellence</button>
+              <button type="button" class="btn-sort-preset" data-preset="pass_leaders">🎯 100% Pass Leaders</button>
+              <button type="button" class="btn-sort-preset" data-preset="large_colleges">🏛️ Top Large Colleges</button>
+              <button type="button" class="btn-sort-preset" data-preset="science_power">🔬 Science Powerhouses</button>
+            </div>
+
+            <!-- Metric Selector Chips -->
+            <div id="multiSortChips" class="multi-sort-chips">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- MAIN COLLEGES DISPLAY SECTION (All Boards) -->
+      <div id="collegesContainer" style="display: none;">
         
-        <!-- Search Row -->
-        <div class="search-bar-row">
-          <div class="search-input-group">
-            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search by college name, district, or EIIN code (e.g. Notre Dame, City College, Rajshahi College, 108274)...">
+        <!-- Stream Tabs & Secondary Controls -->
+        <div class="secondary-controls">
+          <div class="group-tabs">
+            <button class="tab-btn active" data-group="all">All Streams</button>
+            <button class="tab-btn" data-group="science">Science Focus</button>
+            <button class="tab-btn" data-group="commerce">Commerce Focus</button>
+            <button class="tab-btn" data-group="humanities">Arts Focus</button>
+          </div>
+
+          <div class="pagination-controls">
+            <button id="prevPageBtn" class="btn-page" disabled>&laquo; Previous</button>
+            <span id="pageIndicator" class="page-indicator">Page 1 of 1</span>
+            <button id="nextPageBtn" class="btn-page">Next &raquo;</button>
+          </div>
+
+          <div id="resultsCounter" class="results-summary">
+            Showing <strong id="visibleCount">0</strong> colleges
           </div>
         </div>
 
-        <!-- Filter Options Grid -->
-        <div class="filter-grid">
-          <!-- Board Select -->
-          <div class="custom-select-group">
-            <label for="boardFilter">Education Board</label>
-            <select id="boardFilter" class="custom-select">
-              <option value="ALL">All Boards (7,400+ Colleges & Madrasahs)</option>
-              <option value="DHAKA">Dhaka Board</option>
-              <option value="RAJSHAHI">Rajshahi Board</option>
-              <option value="CHITTAGONG">Chittagong Board</option>
-              <option value="COMILLA">Comilla Board</option>
-              <option value="SYLHET">Sylhet Board</option>
-              <option value="BARISAL">Barisal Board</option>
-              <option value="DINAJPUR">Dinajpur Board</option>
-              <option value="JESSORE">Jessore Board</option>
-              <option value="MYMENSINGH">Mymensingh Board</option>
-              <option value="MADRASAH">Madrasah Board (Alim)</option>
-            </select>
-          </div>
-
-          <!-- District Select -->
-          <div class="custom-select-group">
-            <label for="districtFilter">District (Zilla)</label>
-            <select id="districtFilter" class="custom-select">
-              <option value="ALL">All Districts (Select to Filter)</option>
-            </select>
-          </div>
-
-          <!-- Thana Select -->
-          <div class="custom-select-group">
-            <label for="thanaFilter">Thana / Upazilla</label>
-            <select id="thanaFilter" class="custom-select">
-              <option value="ALL">All Thanas</option>
-            </select>
-          </div>
-
-          <!-- Entries Per Page Selector -->
-          <div class="custom-select-group">
-            <label for="entriesPerPage">Entries Per Page</label>
-            <select id="entriesPerPage" class="custom-select">
-              <option value="10">Show 10 Entries</option>
-              <option value="20" selected>Show 20 Entries</option>
-              <option value="50">Show 50 Entries</option>
-              <option value="100">Show 100 Entries</option>
-              <option value="ALL">Show All Entries</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- 2-CLICK MULTI-SORT PRIORITY SELECTOR -->
-        <div class="multi-sort-section">
-          <div class="multi-sort-header">
-            <h4>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="14" y2="12"></line><line x1="4" y1="18" x2="8" y2="18"></line></svg>
-              Multi-Sort Priority Builder (Click Once for ON, Click Again for OFF — 2 Clicks Max)
-            </h4>
-            <button id="resetSortBtn" class="btn-reset-sort">
-              Reset Priority
-            </button>
-          </div>
-          <div id="multiSortChips" class="multi-sort-chips">
+        <!-- Colleges Card Grid -->
+        <main>
+          <div id="collegesGrid" class="colleges-grid">
             <!-- Rendered dynamically by app.js -->
           </div>
-        </div>
+        </main>
 
       </div>
-    </section>
+    </div>
 
-    <!-- MAIN COLLEGES DISPLAY SECTION -->
-    <div id="collegesContainer" style="display: none;">
+
+    <!-- =========================================================================
+         MODE 2: DHAKA BOARD PREVIOUS YEAR (2025) ADMISSION BENCHMARK ARCHIVE
+         ========================================================================= -->
+    <div id="dhakaSection" class="portal-mode-section" style="display: none;">
       
-      <!-- Stream Tabs & Secondary Controls -->
+      <!-- Dhaka Hero Header -->
+      <section class="dhaka-hero-card">
+        <div class="dhaka-header-row">
+          <div class="dhaka-title-col">
+            <div class="dhaka-badge-tag">
+              <span class="tag-square-emerald"></span>
+              HISTORICAL ADMISSION BENCHMARK &bull; DHAKA BOARD (2025 BATCH)
+            </div>
+            <h2 class="dhaka-title">Dhaka Board Class XI Minimum GPA & Seat Capacity Benchmark (2025 Archive)</h2>
+            <p class="dhaka-subtitle">
+              Review official previous year (2025) minimum GPA cutoff requirements, approved seat capacities, shifts (Morning/Day), versions (Bangla/English), and gender criteria across <strong>1,186 Dhaka Board institutions</strong> to estimate your admission prospects.
+            </p>
+          </div>
+          <div class="dhaka-stats-col">
+            <div class="dhaka-stat-box">
+              <span class="dhaka-stat-val" id="dhakaTotalCollegesCount">1,186</span>
+              <span class="dhaka-stat-lbl">Institutions</span>
+            </div>
+            <div class="dhaka-stat-box highlight-box">
+              <span class="dhaka-stat-val" id="dhakaTotalOffersCount">3,535</span>
+              <span class="dhaka-stat-lbl">Course Offerings</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CRITICAL VISITOR WARNING & SOURCE ATTRIBUTION BANNER -->
+      <div class="dhaka-warning-box">
+        <div class="dhaka-warning-title-bar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>CRITICAL NOTICE: PREVIOUS YEAR (2025) BENCHMARK ARCHIVE — NOT LIVE ADMISSION STATS</span>
+        </div>
+
+        <p class="dhaka-warning-text">
+          The minimum GPA cutoffs and seat counts presented here are historical archival records from the <strong>previous Class XI admission cycle (2025)</strong>. These are <strong>NOT live vacancy statistics</strong> and do not indicate current open seats for ongoing admissions. Admission criteria, minimum GPA cutoffs, and group seat limits are determined independently each year by college authorities and Board circulars. Use this tool strictly as a reference to gauge past competitive benchmarks.
+        </p>
+
+        <div class="dhaka-warning-sources">
+          <span class="sources-label">Official Sources for Verification:</span>
+          <div class="sources-links-row">
+            <a href="https://erp.dhakaeducationboard.gov.bd/index.php/tc/seat_list/2025" target="_blank" rel="noopener" class="warning-source-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Dhaka Education Board ERP Seat List (2025 Archive)</span>
+            </a>
+            <a href="https://www.educationboardresults.gov.bd/v2/home" target="_blank" rel="noopener" class="warning-source-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Web Based Result Publication System</span>
+            </a>
+            <a href="http://xiclassadmission.gov.bd" target="_blank" rel="noopener" class="warning-source-link highlight-source">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Official XI Class Admission Portal (xiclassadmission.gov.bd)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dhaka Filter Control Panel -->
+      <section class="filter-wrapper">
+        <div class="filter-glass-card dhaka-filter-glass">
+          
+          <!-- Search Bar Row -->
+          <div class="search-bar-row">
+            <div class="search-input-group">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="dhakaSearchInput" class="search-input" placeholder="Search Dhaka colleges by name, EIIN, thana, or district (e.g. Notre Dame, City College, Dhanmondi, 108274)...">
+            </div>
+          </div>
+
+          <!-- CANDIDATE PROFILE & GPA BENCHMARK MATCHER BOX -->
+          <div class="dhaka-eligibility-box">
+            <div class="dhaka-eligibility-header">
+              <div class="dhaka-eligibility-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Candidate GPA Benchmark Matcher (Optional)</span>
+              </div>
+              <span class="dhaka-eligibility-hint">Enter your SSC GPA to test if you would meet previous year minimum GPA cutoffs</span>
+            </div>
+
+            <div class="dhaka-eligibility-body">
+              <!-- GPA Input & Chips -->
+              <div class="dhaka-gpa-ctrl">
+                <div class="gpa-input-label-row">
+                  <label for="dhakaGpaInput">Your SSC GPA (0.00 – 5.00)</label>
+                  <span id="gpaStatusFeedback" class="gpa-status-badge">No GPA Entered</span>
+                </div>
+                <div class="dhaka-gpa-input-group">
+                  <input type="number" id="dhakaGpaInput" class="dhaka-gpa-field" min="1.0" max="5.0" step="0.01" placeholder="e.g. 4.50">
+                  <button type="button" id="dhakaGpaClearBtn" class="btn-clear-gpa" title="Clear GPA">&times;</button>
+                </div>
+                <div class="dhaka-gpa-preset-row">
+                  <span class="preset-label">Quick Set:</span>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="5.00">5.00</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="4.75">4.75</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="4.50">4.50</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="4.00">4.00</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="3.50">3.50</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="3.00">3.00</button>
+                </div>
+              </div>
+
+              <!-- Eligibility Mode Toggles -->
+              <div class="dhaka-gpa-toggles">
+                <label class="dhaka-checkbox-label">
+                  <input type="checkbox" id="dhakaOnlyEligibleToggle">
+                  <span class="dhaka-custom-checkbox"></span>
+                  <span class="dhaka-toggle-content">
+                    <strong class="dhaka-toggle-title">Show ONLY Colleges Where I Meet 2025 Min GPA</strong>
+                    <span class="dhaka-toggle-desc">Hides any institution whose previous year minimum requirement exceeds your entered GPA</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dhaka Filter Grid -->
+          <div class="filter-grid dhaka-filter-grid">
+            <!-- District Select -->
+            <div class="custom-select-group">
+              <label for="dhakaDistrictFilter">District (Zilla)</label>
+              <select id="dhakaDistrictFilter" class="custom-select">
+                <option value="ALL">All Dhaka Districts (15 Zillas)</option>
+              </select>
+            </div>
+
+            <!-- Thana Select -->
+            <div class="custom-select-group">
+              <label for="dhakaThanaFilter">Thana / Upazilla</label>
+              <select id="dhakaThanaFilter" class="custom-select">
+                <option value="ALL">All Thanas</option>
+              </select>
+            </div>
+
+            <!-- Gender Filter -->
+            <div class="custom-select-group">
+              <label for="dhakaGenderFilter">Gender Admission Criteria</label>
+              <select id="dhakaGenderFilter" class="custom-select">
+                <option value="ALL">All Gender Criteria</option>
+                <option value="Male">Male / Boys (Includes Co-Ed)</option>
+                <option value="Female">Female / Girls (Includes Co-Ed)</option>
+                <option value="Combined">Co-Ed (Combined Only)</option>
+                <option value="MaleOnly">Boys-Only Institutions</option>
+                <option value="FemaleOnly">Girls-Only Institutions</option>
+              </select>
+            </div>
+
+            <!-- Group / Stream Filter -->
+            <div class="custom-select-group">
+              <label for="dhakaGroupFilter">Academic Group</label>
+              <select id="dhakaGroupFilter" class="custom-select">
+                <option value="ALL">All Academic Groups</option>
+                <option value="Science">Science</option>
+                <option value="Business Studies">Business Studies (Commerce)</option>
+                <option value="Humanities">Humanities (Arts)</option>
+                <option value="Music">Music</option>
+                <option value="Home Economics">Home Economics</option>
+              </select>
+            </div>
+
+            <!-- Shift Filter -->
+            <div class="custom-select-group">
+              <label for="dhakaShiftFilter">Shift Schedule</label>
+              <select id="dhakaShiftFilter" class="custom-select">
+                <option value="ALL">All Shifts (Day & Morning)</option>
+                <option value="DAY">Day Shift</option>
+                <option value="MORNING">Morning Shift</option>
+              </select>
+            </div>
+
+            <!-- Medium / Version Filter -->
+            <div class="custom-select-group">
+              <label for="dhakaMediumFilter">Version / Medium</label>
+              <select id="dhakaMediumFilter" class="custom-select">
+                <option value="ALL">All Versions (Bangla & English)</option>
+                <option value="BANGLA">Bangla Medium</option>
+                <option value="ENGLISH">English Version</option>
+              </select>
+            </div>
+
+            <!-- Sort By Selector -->
+            <div class="custom-select-group">
+              <label for="dhakaSortFilter">Sort Colleges By</label>
+              <select id="dhakaSortFilter" class="custom-select">
+                <option value="seat_desc" selected>Approved Seat Capacity (Largest First)</option>
+                <option value="gpa_asc">Min GPA Cutoff (Lowest / Easiest First)</option>
+                <option value="gpa_desc">Min GPA Cutoff (Highest Competitive First)</option>
+                <option value="name_asc">College Name (A-Z)</option>
+              </select>
+            </div>
+
+            <!-- Entries Per Page -->
+            <div class="custom-select-group">
+              <label for="dhakaEntriesPerPage">Entries Per Page</label>
+              <select id="dhakaEntriesPerPage" class="custom-select">
+                <option value="10">Show 10 Entries</option>
+                <option value="20" selected>Show 20 Entries</option>
+                <option value="50">Show 50 Entries</option>
+                <option value="100">Show 100 Entries</option>
+                <option value="ALL">Show All Entries</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Reset Button Bar -->
+          <div class="dhaka-filter-actions">
+            <button id="dhakaResetBtn" class="btn-reset-sort" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+              <span>Reset All Dhaka Filters</span>
+            </button>
+            <div id="dhakaActiveFilterTags" class="dhaka-filter-tags">
+              <!-- Active filter pills rendered dynamically -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Dhaka Stream Tabs & Pagination Controls -->
       <div class="secondary-controls">
-        <div class="group-tabs">
-          <button class="tab-btn active" data-group="all">All Streams</button>
-          <button class="tab-btn" data-group="science">Science Focus</button>
-          <button class="tab-btn" data-group="commerce">Commerce Focus</button>
-          <button class="tab-btn" data-group="humanities">Arts Focus</button>
+        <div class="group-tabs" id="dhakaGroupTabs">
+          <button class="tab-btn active" data-dhaka-group="ALL">All Streams</button>
+          <button class="tab-btn" data-dhaka-group="Science">Science</button>
+          <button class="tab-btn" data-dhaka-group="Business Studies">Commerce</button>
+          <button class="tab-btn" data-dhaka-group="Humanities">Arts</button>
         </div>
 
         <div class="pagination-controls">
-          <button id="prevPageBtn" class="btn-page" disabled>&laquo; Previous</button>
-          <span id="pageIndicator" class="page-indicator">Page 1 of 1</span>
-          <button id="nextPageBtn" class="btn-page">Next &raquo;</button>
+          <button id="dhakaPrevPageBtn" class="btn-page" disabled>&laquo; Previous</button>
+          <span id="dhakaPageIndicator" class="page-indicator">Page 1 of 1</span>
+          <button id="dhakaNextPageBtn" class="btn-page">Next &raquo;</button>
         </div>
 
-        <div id="resultsCounter" class="results-summary">
-          Showing <strong id="visibleCount">0</strong> colleges
+        <div id="dhakaResultsCounter" class="results-summary">
+          Showing <strong id="dhakaVisibleCount">0</strong> colleges (<strong id="dhakaVisibleSeats">0</strong> total approved seats)
         </div>
       </div>
 
-      <!-- Colleges Card Grid -->
+      <!-- Dhaka Colleges Grid -->
       <main>
-        <div id="collegesGrid" class="colleges-grid">
+        <div id="dhakaCollegesGrid" class="colleges-grid">
           <!-- Rendered dynamically by app.js -->
         </div>
       </main>
@@ -302,13 +620,13 @@
         </div>
       </div>
       <div class="footer-copyright">
-        <span>&copy; 2026 MD. Mahinur Rahman Prachurza. Built for SSC-26 Candidates. Official Verification: <a href="https://www.educationboardresults.gov.bd/v2/home" target="_blank" rel="noopener">educationboardresults.gov.bd</a></span>
+        <span>&copy; 2026 MD. Mahinur Rahman Prachurza. Built for SSC-26 Candidates. Official Results: <a href="https://www.educationboardresults.gov.bd/v2/home" target="_blank" rel="noopener">educationboardresults.gov.bd</a> &bull; Dhaka ERP Archive: <a href="https://erp.dhakaeducationboard.gov.bd/index.php/tc/seat_list/2025" target="_blank" rel="noopener">erp.dhakaeducationboard.gov.bd</a> &bull; Admission Portal: <a href="http://xiclassadmission.gov.bd" target="_blank" rel="noopener">xiclassadmission.gov.bd</a></span>
       </div>
     </footer>
 
   </div>
 
-  <!-- Detail Modal Dialog -->
+  <!-- Detail Modal Dialog (All Boards Academic Results) -->
   <div id="detailModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-card">
       <button id="modalClose" class="modal-close" aria-label="Close modal">
@@ -321,6 +639,28 @@
       </div>
 
       <div id="modalBody">
+        <!-- Modal content filled by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Dhaka Special Detail Modal Dialog (Seats & Offerings Matrix) -->
+  <div id="dhakaDetailModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card modal-card-large">
+      <button id="dhakaModalClose" class="modal-close" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      
+      <div class="modal-header">
+        <div class="modal-badge-row">
+          <span class="modal-board-tag">DHAKA EDUCATION BOARD &bull; 2025 BENCHMARK ARCHIVE</span>
+          <span id="dhakaModalEiinTag" class="modal-eiin-tag">EIIN: 107820</span>
+        </div>
+        <h2 id="dhakaModalTitle" class="modal-title">College Name</h2>
+        <p id="dhakaModalSubtitle" class="modal-subtitle">Location & Administration</p>
+      </div>
+
+      <div id="dhakaModalBody">
         <!-- Modal content filled by app.js -->
       </div>
     </div>
