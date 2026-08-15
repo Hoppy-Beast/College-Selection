@@ -27,6 +27,7 @@ BENCHMARKS = {
     "105824": {"name": "COMILLA VICTORIA GOVT. COLLEGE", "total": 2400, "pass_rate": 98.1, "gpa5": 1250, "sc_pass": 98.8, "sc_gpa5": 920, "cm_pass": 97.2, "cm_gpa5": 240, "hu_pass": 96.8, "hu_gpa5": 90},
     "130452": {"name": "MURARI CHAND (MC) COLLEGE SYLHET", "total": 1900, "pass_rate": 98.5, "gpa5": 980, "sc_pass": 99.1, "sc_gpa5": 740, "cm_pass": 97.6, "cm_gpa5": 170, "hu_pass": 96.8, "hu_gpa5": 70},
     "104662": {"name": "NIZAMPUR GOVERNMENT COLLEGE", "total": 956, "pass_rate": 27.41, "gpa5": 11, "sc_pass": 35.33, "sc_gpa5": 3, "cm_pass": 32.86, "cm_gpa5": 7, "hu_pass": 19.34, "hu_gpa5": 1},
+    "122456": {"name": "ROYGANJ COLLEGE, KURIGRAM", "total": 1267, "pass_rate": 97.84, "gpa5": 679, "sc_pass": 98.56, "sc_gpa5": 455, "cm_pass": 96.01, "cm_gpa5": 119, "hu_pass": 94.59, "hu_gpa5": 105},
 }
 
 board_name_map = {
