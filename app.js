@@ -81,7 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) {
         throw new Error(`Failed to load dataset (${response.status} ${response.statusText})`);
       }
-      collegesData = await response.json();
+      const rawData = await response.json();
+
+      // Hardcoded Exclusion: Never display Hermann Gmeiner / EIIN 108215
+      collegesData = rawData.filter(c => {
+        if (!c) return false;
+        const eiin = String(c.eiin || '').trim();
+        const name = String(c.name || '').toUpperCase();
+        if (eiin === '108215' || name.includes('HERMANN') || name.includes('GMEINER')) {
+          return false;
+        }
+        return true;
+      });
 
       collegesData.forEach(c => {
         const appeared = c.appeared || c.total_examinees || 1;
