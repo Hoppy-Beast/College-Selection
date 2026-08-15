@@ -1346,11 +1346,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateGpaStatusFeedback() {
     if (dhakaState.gpa === null) {
-      gpaStatusFeedback.textContent = 'Enter your GPA to evaluate requirements';
-      gpaStatusFeedback.className = 'gpa-feedback-pill';
+      gpaStatusFeedback.textContent = 'No GPA Entered';
+      gpaStatusFeedback.className = 'gpa-status-badge';
+      if (dhakaGpaClearBtn) dhakaGpaClearBtn.style.display = 'none';
     } else {
-      gpaStatusFeedback.textContent = `Candidate GPA: ${dhakaState.gpa.toFixed(2)} (Evaluating 2025 Benchmarks)`;
-      gpaStatusFeedback.className = 'gpa-feedback-pill active';
+      gpaStatusFeedback.textContent = `Candidate GPA: ${dhakaState.gpa.toFixed(2)} (Active)`;
+      gpaStatusFeedback.className = 'gpa-status-badge active-gpa';
+      if (dhakaGpaClearBtn) dhakaGpaClearBtn.style.display = 'block';
     }
   }
 

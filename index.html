@@ -418,36 +418,47 @@
       <section class="filter-wrapper">
         <div class="filter-glass-card dhaka-filter-glass">
           
-          <!-- Candidate GPA Filter Card -->
-          <div class="dhaka-gpa-card">
-            <div class="gpa-card-header">
-              <div class="gpa-card-title-col">
-                <span class="gpa-card-title">Your SSC GPA (0.00 – 5.00) &bull; Filter & Sort by Cutoff</span>
-                <span class="gpa-card-sub">Enter your exact SSC GPA to highlight colleges and filter by minimum cutoff criteria. Results are sorted from highest to lowest required GPA.</span>
+          <!-- CANDIDATE PROFILE & GPA BENCHMARK MATCHER BOX -->
+          <div class="dhaka-eligibility-box">
+            <div class="dhaka-eligibility-header">
+              <div class="dhaka-eligibility-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Your SSC GPA (0.00 – 5.00) &bull; Filter & Sort by Cutoff</span>
               </div>
-              <div class="gpa-quick-chips">
-                <span class="quick-chip-label">Quick Pick:</span>
-                <button type="button" class="dhaka-gpa-chip" data-gpa="5.00">5.00 (Golden / A+)</button>
-                <button type="button" class="dhaka-gpa-chip" data-gpa="4.50">4.50+</button>
-                <button type="button" class="dhaka-gpa-chip" data-gpa="4.00">4.00+</button>
-                <button type="button" class="dhaka-gpa-chip" data-gpa="3.50">3.50+</button>
-                <button type="button" class="dhaka-gpa-chip" data-gpa="3.00">3.00+</button>
-              </div>
+              <span class="dhaka-eligibility-hint">Enter your exact SSC GPA to highlight colleges and filter by minimum cutoff criteria. Results are sorted from highest to lowest required GPA.</span>
             </div>
 
-            <div class="gpa-card-controls">
-              <div class="gpa-input-wrapper">
-                <input type="number" id="dhakaGpaInput" class="gpa-numeric-input" min="0.00" max="5.00" step="0.01" placeholder="e.g. 4.85, 5.00">
-                <button type="button" id="dhakaGpaClearBtn" class="gpa-clear-btn" title="Clear GPA filter">&times;</button>
+            <div class="dhaka-eligibility-body">
+              <!-- GPA Input & Chips -->
+              <div class="dhaka-gpa-ctrl">
+                <div class="gpa-input-label-row">
+                  <label for="dhakaGpaInput">Your SSC GPA (0.00 – 5.00)</label>
+                  <span id="gpaStatusFeedback" class="gpa-status-badge">No GPA Entered</span>
+                </div>
+                <div class="dhaka-gpa-input-group">
+                  <input type="number" id="dhakaGpaInput" class="dhaka-gpa-field" min="0.00" max="5.00" step="0.01" placeholder="e.g. 4.85, 5.00">
+                  <button type="button" id="dhakaGpaClearBtn" class="btn-clear-gpa" title="Clear GPA">&times;</button>
+                </div>
+                <div class="dhaka-gpa-preset-row">
+                  <span class="preset-label">Quick Pick:</span>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="5.00">5.00 (Golden / A+)</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="4.50">4.50+</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="4.00">4.00+</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="3.50">3.50+</button>
+                  <button type="button" class="dhaka-gpa-chip" data-gpa="3.00">3.00+</button>
+                </div>
               </div>
 
-              <label class="gpa-checkbox-label">
-                <input type="checkbox" id="dhakaOnlyEligibleToggle">
-                <span>Only show institutions where candidate GPA &ge; Required Min GPA</span>
-              </label>
-
-              <div id="gpaStatusFeedback" class="gpa-feedback-pill">
-                Enter your GPA to evaluate requirements
+              <!-- Eligibility Mode Toggles -->
+              <div class="dhaka-gpa-toggles">
+                <label class="dhaka-checkbox-label">
+                  <input type="checkbox" id="dhakaOnlyEligibleToggle">
+                  <span class="dhaka-custom-checkbox"></span>
+                  <span class="dhaka-toggle-content">
+                    <strong class="dhaka-toggle-title">Show ONLY Institutions Where GPA &ge; Required Min GPA</strong>
+                    <span class="dhaka-toggle-desc">Hides any institution whose previous year minimum requirement exceeds your entered GPA</span>
+                  </span>
+                </label>
               </div>
             </div>
           </div>
