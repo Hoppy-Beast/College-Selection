@@ -2,7 +2,7 @@
 
 An editorial, high-performance web platform designed and owned by **MD. Mahinur Rahman Prachurza (Prachurza)** in collaboration with **Fahad's Tutorial (FT)** to help **SSC-26 Graduates and Parents in Bangladesh** discover, compare, and rank top **HSC Colleges** across all 64 districts in Bangladesh based on official Education Board Result Publication analytics.
 
-![HSC College Portal Preview](./assets/preview.png)
+![HSC College Portal Preview](./assets/preview.png)(https://hoppy-beast.github.io/College-Selection/)
 
 ---
 
