@@ -153,9 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const visibleCount = document.getElementById('visibleCount');
   const groupTabs = document.querySelectorAll('#allBoardsSection .group-tabs .tab-btn');
 
-  const prevPageBtn = document.getElementById('prevPageBtn');
-  const nextPageBtn = document.getElementById('nextPageBtn');
-  const pageIndicator = document.getElementById('pageIndicator');
+  const prevPageBtns = [document.getElementById('prevPageBtn'), document.getElementById('prevPageBtnTop')].filter(Boolean);
+  const nextPageBtns = [document.getElementById('nextPageBtn'), document.getElementById('nextPageBtnTop')].filter(Boolean);
+  const pageIndicators = [document.getElementById('pageIndicator'), document.getElementById('pageIndicatorTop')].filter(Boolean);
 
   const detailModal = document.getElementById('detailModal');
   const modalClose = document.getElementById('modalClose');
@@ -404,21 +404,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    prevPageBtn.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        applyFiltersAndRender();
-        scrollToTopGrid();
-      }
+    prevPageBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          applyFiltersAndRender();
+          scrollToTopGrid();
+        }
+      });
     });
 
-    nextPageBtn.addEventListener('click', () => {
-      const totalPages = getTotalPages();
-      if (currentPage < totalPages) {
-        currentPage++;
-        applyFiltersAndRender();
-        scrollToTopGrid();
-      }
+    nextPageBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const totalPages = getTotalPages();
+        if (currentPage < totalPages) {
+          currentPage++;
+          applyFiltersAndRender();
+          scrollToTopGrid();
+        }
+      });
     });
 
     resetSortBtn.addEventListener('click', () => {
@@ -735,10 +739,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updatePaginationUI() {
     const totalPages = getTotalPages();
-    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+    pageIndicators.forEach(pi => {
+      pi.textContent = `Page ${currentPage} of ${totalPages}`;
+    });
 
-    prevPageBtn.disabled = (currentPage <= 1);
-    nextPageBtn.disabled = (currentPage >= totalPages);
+    prevPageBtns.forEach(btn => {
+      btn.disabled = (currentPage <= 1);
+    });
+    nextPageBtns.forEach(btn => {
+      btn.disabled = (currentPage >= totalPages);
+    });
   }
 
   function renderCards(batch) {
@@ -1060,9 +1070,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const dhakaActiveFilterTags = document.getElementById('dhakaActiveFilterTags');
 
   const dhakaGroupTabs = document.querySelectorAll('#dhakaGroupTabs .tab-btn');
-  const dhakaPrevPageBtn = document.getElementById('dhakaPrevPageBtn');
-  const dhakaNextPageBtn = document.getElementById('dhakaNextPageBtn');
-  const dhakaPageIndicator = document.getElementById('dhakaPageIndicator');
+  const dhakaPrevPageBtns = [document.getElementById('dhakaPrevPageBtn'), document.getElementById('dhakaPrevPageBtnTop')].filter(Boolean);
+  const dhakaNextPageBtns = [document.getElementById('dhakaNextPageBtn'), document.getElementById('dhakaNextPageBtnTop')].filter(Boolean);
+  const dhakaPageIndicators = [document.getElementById('dhakaPageIndicator'), document.getElementById('dhakaPageIndicatorTop')].filter(Boolean);
   const dhakaVisibleCount = document.getElementById('dhakaVisibleCount');
   const dhakaVisibleSeats = document.getElementById('dhakaVisibleSeats');
   const dhakaCollegesGrid = document.getElementById('dhakaCollegesGrid');
@@ -1266,21 +1276,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    dhakaPrevPageBtn.addEventListener('click', () => {
-      if (dhakaCurrentPage > 1) {
-        dhakaCurrentPage--;
-        applyDhakaFiltersAndRender();
-        scrollToTopDhaka();
-      }
+    dhakaPrevPageBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (dhakaCurrentPage > 1) {
+          dhakaCurrentPage--;
+          applyDhakaFiltersAndRender();
+          scrollToTopDhaka();
+        }
+      });
     });
 
-    dhakaNextPageBtn.addEventListener('click', () => {
-      const totalPages = getDhakaTotalPages();
-      if (dhakaCurrentPage < totalPages) {
-        dhakaCurrentPage++;
-        applyDhakaFiltersAndRender();
-        scrollToTopDhaka();
-      }
+    dhakaNextPageBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const totalPages = getDhakaTotalPages();
+        if (dhakaCurrentPage < totalPages) {
+          dhakaCurrentPage++;
+          applyDhakaFiltersAndRender();
+          scrollToTopDhaka();
+        }
+      });
     });
 
     dhakaResetBtn.addEventListener('click', resetDhakaFilters);
@@ -1505,10 +1519,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateDhakaPaginationUI() {
     const totalPages = getDhakaTotalPages();
-    dhakaPageIndicator.textContent = `Page ${dhakaCurrentPage} of ${totalPages}`;
+    dhakaPageIndicators.forEach(pi => {
+      pi.textContent = `Page ${dhakaCurrentPage} of ${totalPages}`;
+    });
 
-    dhakaPrevPageBtn.disabled = (dhakaCurrentPage <= 1);
-    dhakaNextPageBtn.disabled = (dhakaCurrentPage >= totalPages);
+    dhakaPrevPageBtns.forEach(btn => {
+      btn.disabled = (dhakaCurrentPage <= 1);
+    });
+    dhakaNextPageBtns.forEach(btn => {
+      btn.disabled = (dhakaCurrentPage >= totalPages);
+    });
   }
 
   function renderDhakaCards(batch) {

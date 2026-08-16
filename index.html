@@ -320,7 +320,7 @@
       <!-- Secondary Controls & Grid Container -->
       <div id="collegesContainer" style="display: none;">
         
-        <!-- Stream Filter Tabs & Pagination Summary -->
+        <!-- Stream Filter Tabs, Top Pagination, & Summary Counter -->
         <div class="secondary-controls">
           <div class="group-tabs">
             <button class="tab-btn active" data-group="all">All Groups Combined</button>
@@ -329,7 +329,13 @@
             <button class="tab-btn" data-group="humanities">Arts Focus</button>
           </div>
 
-          <div class="stats-counter">
+          <div class="pagination-controls">
+            <button id="prevPageBtnTop" class="btn-page" disabled>&laquo; Previous</button>
+            <span id="pageIndicatorTop" class="page-indicator">Page 1 of 1</span>
+            <button id="nextPageBtnTop" class="btn-page">Next &raquo;</button>
+          </div>
+
+          <div class="results-summary">
             Showing <strong id="visibleCount">0</strong> matching institutions
           </div>
         </div>
@@ -339,18 +345,14 @@
           <!-- Dynamically Populated Cards -->
         </div>
 
-        <!-- Pagination Controls -->
-        <footer class="pagination-footer">
-          <button id="prevPageBtn" class="btn-pagination" disabled>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Previous Page</span>
-          </button>
-          <div id="pageIndicator" class="page-indicator">Page 1 of 1</div>
-          <button id="nextPageBtn" class="btn-pagination">
-            <span>Next Page</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </footer>
+        <!-- Bottom Pagination Controls -->
+        <div class="bottom-pagination-bar">
+          <div class="pagination-controls">
+            <button id="prevPageBtn" class="btn-page" disabled>&laquo; Previous Page</button>
+            <span id="pageIndicator" class="page-indicator">Page 1 of 1</span>
+            <button id="nextPageBtn" class="btn-page">Next Page &raquo;</button>
+          </div>
+        </div>
 
       </div>
 
@@ -573,7 +575,7 @@
         </div>
       </section>
 
-      <!-- Dhaka Stream Tabs & Pagination Controls -->
+      <!-- Dhaka Stream Tabs, Top Pagination Controls & Results Counter -->
       <div class="secondary-controls">
         <div class="group-tabs" id="dhakaGroupTabs">
           <button class="tab-btn active" data-dhaka-group="ALL">All Streams</button>
@@ -583,9 +585,9 @@
         </div>
 
         <div class="pagination-controls">
-          <button id="dhakaPrevPageBtn" class="btn-page" disabled>&laquo; Previous</button>
-          <span id="dhakaPageIndicator" class="page-indicator">Page 1 of 1</span>
-          <button id="dhakaNextPageBtn" class="btn-page">Next &raquo;</button>
+          <button id="dhakaPrevPageBtnTop" class="btn-page" disabled>&laquo; Previous</button>
+          <span id="dhakaPageIndicatorTop" class="page-indicator">Page 1 of 1</span>
+          <button id="dhakaNextPageBtnTop" class="btn-page">Next &raquo;</button>
         </div>
 
         <div id="dhakaResultsCounter" class="results-summary">
@@ -599,6 +601,15 @@
           <!-- Rendered dynamically by app.js -->
         </div>
       </main>
+
+      <!-- Dhaka Bottom Pagination Controls -->
+      <div class="bottom-pagination-bar">
+        <div class="pagination-controls">
+          <button id="dhakaPrevPageBtn" class="btn-page" disabled>&laquo; Previous Page</button>
+          <span id="dhakaPageIndicator" class="page-indicator">Page 1 of 1</span>
+          <button id="dhakaNextPageBtn" class="btn-page">Next Page &raquo;</button>
+        </div>
+      </div>
 
     </div>
 
