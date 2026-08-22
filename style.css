@@ -33,10 +33,18 @@
   --transition-smooth: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  min-width: 0;
 }
 
 body {
@@ -45,6 +53,8 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -53,6 +63,8 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Editorial Top Bar */
@@ -2132,6 +2144,53 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* Structured Min/Max GPA Range Block */
+.gpa-range-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gpa-range-split {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.gpa-split-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gpa-split-num {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent-emerald);
+  line-height: 1;
+}
+
+.gpa-split-tag {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.gpa-split-sep {
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
 /* User GPA Eligibility Alert in Card */
 .eligibility-alert-box {
   padding: 8px 12px;
@@ -2227,6 +2286,12 @@ body {
   border: 1px solid rgba(245, 158, 11, 0.4);
 }
 
+.group-madrasah {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
 .group-other {
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
@@ -2297,9 +2362,11 @@ body {
 
 .modal-badge-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 8px;
   align-items: center;
+  padding-right: 44px;
 }
 
 .modal-board-tag {
@@ -2451,24 +2518,396 @@ body {
   text-decoration: none;
 }
 
+/* ==========================================================================
+   Responsive Breakpoints & Masterclass Mobile UX Adaptations
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .filter-grid,
+  .dhaka-filter-grid,
+  .board-filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
-  .container { padding: 0 16px; }
-  .app-header { padding: 32px 0 20px; }
-  .editorial-welcome-card { padding: 24px 16px; }
-  .filter-grid { grid-template-columns: 1fr 1fr; }
-  .dhaka-filter-grid { grid-template-columns: 1fr 1fr; }
-  .colleges-grid { grid-template-columns: 1fr; }
-  .modal-dashboard-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .modal-stream-grid { grid-template-columns: 1fr; }
-  .dhaka-eligibility-body { grid-template-columns: 1fr; gap: 16px; }
-  .dhaka-stats-col { width: 100%; justify-content: space-between; }
-  .dhaka-stat-box { flex: 1; min-width: unset; }
+  .container {
+    padding: 0 16px;
+  }
+  
+  .editorial-topbar {
+    padding: 8px 0;
+  }
+  
+  .topbar-inner {
+    padding: 0 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .app-header {
+    padding: 28px 0 20px;
+  }
+  
+  .hero-brand-header {
+    gap: 12px;
+  }
+  
+  .hero-logo-img {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .app-title {
+    font-size: 1.85rem;
+    line-height: 1.15;
+  }
+  
+  .app-subtitle {
+    font-size: 0.92rem;
+    margin-bottom: 20px;
+  }
+  
+  .editorial-welcome-card {
+    padding: 20px 16px;
+  }
+  
+  .welcome-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  
+  .welcome-title {
+    font-size: 1.4rem;
+  }
+  
+  .welcome-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-primary-explore,
+  .btn-secondary-explore {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .ft-marketing-card {
+    padding: 18px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  
+  .btn-ft-visit {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .portal-nav-bar {
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px;
+  }
+  
+  .nav-mode-btn {
+    min-width: 0;
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    justify-content: space-between;
+  }
+  
+  .filter-glass-card {
+    padding: 18px 14px;
+  }
+  
+  .filter-grid,
+  .dhaka-filter-grid,
+  .board-filter-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .colleges-grid,
+  .dhaka-colleges-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .secondary-controls,
+  .dhaka-secondary-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .group-tabs {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .pagination-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .dhaka-eligibility-card {
+    padding: 18px 14px;
+  }
+  
+  .dhaka-eligibility-body {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  
+  .dhaka-stats-col {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .dhaka-stat-box {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 14px;
+  }
+  
+  .modal-overlay {
+    padding: 10px;
+  }
+  
+  .modal-card,
+  .modal-card-large {
+    width: 100%;
+    max-width: 100%;
+    max-height: 94vh;
+    padding: 20px 14px;
+  }
+  
+  .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+  
+  .modal-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .modal-stream-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .dhaka-modal-table-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .dhaka-modal-table th,
+  .dhaka-modal-table td {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .filter-grid { grid-template-columns: 1fr; }
-  .dhaka-filter-grid { grid-template-columns: 1fr; }
-  .stream-mini-grid { grid-template-columns: 1fr; }
-  .nav-mode-btn { min-width: 100%; }
-  .dhaka-card-metrics { grid-template-columns: 1fr; gap: 6px; }
+  .container {
+    padding: 0 12px;
+  }
+  
+  .topbar-inner {
+    padding: 0 12px;
+  }
+  
+  .app-title {
+    font-size: 1.55rem;
+  }
+  
+  .hero-logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+  
+  .header-tag {
+    font-size: 0.72rem;
+  }
+  
+  .filter-glass-card {
+    padding: 14px 10px;
+  }
+  
+  .search-input {
+    font-size: 0.88rem;
+    padding: 12px 14px 12px 42px;
+    min-height: 44px;
+  }
+  
+  .search-icon {
+    left: 14px;
+  }
+  
+  .custom-select {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    min-height: 42px;
+  }
+  
+  /* Board Quick Chips neat wrap */
+  .board-quick-chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  
+  .board-chip-btn {
+    flex: 1 1 calc(33.333% - 5px);
+    text-align: center;
+    padding: 6px 4px;
+    font-size: 0.72rem;
+    min-height: 32px;
+  }
+  
+  /* Multi Sort Chips */
+  .multi-sort-chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  
+  .sort-pill {
+    padding: 6px 8px;
+    font-size: 0.74rem;
+    min-height: 34px;
+    justify-content: space-between;
+  }
+  
+  .sort-presets-row {
+    gap: 4px;
+  }
+  
+  .btn-sort-preset {
+    padding: 3px 7px;
+    font-size: 0.72rem;
+  }
+  
+  /* College Card */
+  .college-card,
+  .dhaka-card {
+    padding: 14px 10px;
+  }
+  
+  .card-title,
+  .dhaka-card-title {
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+  
+  .card-top-bar,
+  .dhaka-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .rank-badge,
+  .dhaka-seat-pill {
+    align-self: flex-start;
+  }
+  
+  /* Card Metrics Grid */
+  .dhaka-card-metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 8px 4px;
+    margin-bottom: 12px;
+  }
+  
+  .dhaka-metric-val {
+    font-size: 1rem;
+  }
+  
+  .dhaka-metric-lbl {
+    font-size: 0.62rem;
+  }
+  
+  .gpa-split-num {
+    font-size: 0.98rem;
+  }
+  
+  .gpa-split-tag {
+    font-size: 0.55rem;
+  }
+  
+  .gpa-split-sep {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  
+  /* Offer Items */
+  .dhaka-offer-item {
+    padding: 8px 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  
+  .dhaka-offer-left {
+    width: 100%;
+  }
+  
+  .dhaka-offer-right {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+    padding-top: 6px;
+  }
+  
+  /* Candidate GPA bar */
+  .dhaka-gpa-preset-row {
+    gap: 4px;
+  }
+  
+  .dhaka-gpa-chip {
+    padding: 4px 6px;
+    font-size: 0.72rem;
+  }
+  
+  .dhaka-gpa-field {
+    font-size: 0.95rem;
+    padding: 8px 32px 8px 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .board-chip-btn {
+    flex: 1 1 calc(50% - 5px);
+  }
+  
+  .multi-sort-chips {
+    grid-template-columns: 1fr;
+  }
+  
+  .dhaka-card-metrics {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 8px;
+  }
 }

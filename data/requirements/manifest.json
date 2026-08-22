@@ -1,0 +1,97 @@
+{
+  "total_colleges": 7734,
+  "total_seats": 2614197,
+  "total_offers": 17590,
+  "boards": {
+    "COMILLA": {
+      "board_code": "COMILLA",
+      "board_name": "Comilla",
+      "colleges_count": 460,
+      "total_seats": 257510,
+      "total_offers": 1337,
+      "file": "comilla.json",
+      "file_kb": 620.9
+    },
+    "CHITTAGONG": {
+      "board_code": "CHITTAGONG",
+      "board_name": "Chittagong",
+      "colleges_count": 279,
+      "total_seats": 168379,
+      "total_offers": 778,
+      "file": "chittagong.json",
+      "file_kb": 368.3
+    },
+    "DHAKA": {
+      "board_code": "DHAKA",
+      "board_name": "Dhaka",
+      "colleges_count": 1121,
+      "total_seats": 518106,
+      "total_offers": 3291,
+      "file": "dhaka.json",
+      "file_kb": 1516.3
+    },
+    "DINAJPUR": {
+      "board_code": "DINAJPUR",
+      "board_name": "Dinajpur",
+      "colleges_count": 703,
+      "total_seats": 327410,
+      "total_offers": 2096,
+      "file": "dinajpur.json",
+      "file_kb": 963.2
+    },
+    "BARISAL": {
+      "board_code": "BARISAL",
+      "board_name": "Barisal",
+      "colleges_count": 364,
+      "total_seats": 156898,
+      "total_offers": 1019,
+      "file": "barisal.json",
+      "file_kb": 478.3
+    },
+    "MYMENSINGH": {
+      "board_code": "MYMENSINGH",
+      "board_name": "Mymensingh",
+      "colleges_count": 306,
+      "total_seats": 130745,
+      "total_offers": 855,
+      "file": "mymensingh.json",
+      "file_kb": 403.4
+    },
+    "MADRASAH": {
+      "board_code": "MADRASAH",
+      "board_name": "Madrasah",
+      "colleges_count": 2774,
+      "total_seats": 309255,
+      "total_offers": 3425,
+      "file": "madrasah.json",
+      "file_kb": 2280.0
+    },
+    "JESSORE": {
+      "board_code": "JESSORE",
+      "board_name": "Jessore",
+      "colleges_count": 588,
+      "total_seats": 220489,
+      "total_offers": 1677,
+      "file": "jessore.json",
+      "file_kb": 779.7
+    },
+    "RAJSHAHI": {
+      "board_code": "RAJSHAHI",
+      "board_name": "Rajshahi",
+      "colleges_count": 809,
+      "total_seats": 386670,
+      "total_offers": 2390,
+      "file": "rajshahi.json",
+      "file_kb": 1100.7
+    },
+    "SYLHET": {
+      "board_code": "SYLHET",
+      "board_name": "Sylhet",
+      "colleges_count": 330,
+      "total_seats": 138735,
+      "total_offers": 722,
+      "file": "sylhet.json",
+      "file_kb": 369.9
+    }
+  }
+}

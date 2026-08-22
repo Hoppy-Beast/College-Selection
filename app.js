@@ -1029,11 +1029,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // =========================================================================
-  // MODULE 2: DHAKA BOARD PREVIOUS YEAR (2025) BENCHMARK ARCHIVE
+  // MODULE 2: ALL BOARDS CLASS XI PREVIOUS YEAR (2025) BENCHMARK ARCHIVE
   // =========================================================================
   let dhakaCollegesData = [];
   let dhakaFilteredData = [];
   let isDhakaInitialized = false;
+
+  // Cache loaded requirements board chunks in memory
+  const requirementsCache = {};
+  let isLoadingRequirementsBoard = false;
 
   let dhakaCurrentPage = 1;
   let dhakaEntriesPerPage = 20;
@@ -1041,6 +1045,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchQuery: '',
     gpa: null,
     onlyEligible: false,
+    board: 'NONE',
     district: 'ALL',
     thana: 'ALL',
     gender: 'ALL',
@@ -1050,7 +1055,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sort: 'gpa_desc'
   };
 
-  // DOM References (Dhaka Special)
+  // DOM References (All Boards Requirements)
   const dhakaSearchInput = document.getElementById('dhakaSearchInput');
   const dhakaGpaInput = document.getElementById('dhakaGpaInput');
   const dhakaGpaClearBtn = document.getElementById('dhakaGpaClearBtn');
@@ -1058,6 +1063,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const gpaStatusFeedback = document.getElementById('gpaStatusFeedback');
   const dhakaOnlyEligibleToggle = document.getElementById('dhakaOnlyEligibleToggle');
 
+  const dhakaBoardFilter = document.getElementById('dhakaBoardFilter');
+  const dhakaBoardQuickChips = document.querySelectorAll('#dhakaBoardQuickChips .board-chip-btn');
   const dhakaDistrictFilter = document.getElementById('dhakaDistrictFilter');
   const dhakaThanaFilter = document.getElementById('dhakaThanaFilter');
   const dhakaGenderFilter = document.getElementById('dhakaGenderFilter');
@@ -1081,23 +1088,60 @@ document.addEventListener('DOMContentLoaded', () => {
   const dhakaModalClose = document.getElementById('dhakaModalClose');
   const dhakaModalTitle = document.getElementById('dhakaModalTitle');
   const dhakaModalSubtitle = document.getElementById('dhakaModalSubtitle');
+  const dhakaModalBoardTag = document.getElementById('dhakaModalBoardTag');
   const dhakaModalEiinTag = document.getElementById('dhakaModalEiinTag');
   const dhakaModalBody = document.getElementById('dhakaModalBody');
 
-  async function initDhakaSection() {
+  function initDhakaSection() {
     if (isDhakaInitialized) return;
+    isDhakaInitialized = true;
+
+    setupDhakaEventListeners();
+    populateDhakaDistricts();
+    updateDhakaBoardQuickChipsUI();
+    renderSelectRequirementsBoardPrompt();
+  }
+
+  async function loadRequirementsBoardData(boardKey) {
+    dhakaState.board = boardKey;
+    if (dhakaBoardFilter) dhakaBoardFilter.value = boardKey;
+    updateDhakaBoardQuickChipsUI();
+
+    if (boardKey === 'NONE') {
+      dhakaCollegesData = [];
+      dhakaFilteredData = [];
+      if (dhakaVisibleCount) dhakaVisibleCount.textContent = '0';
+      if (dhakaVisibleSeats) dhakaVisibleSeats.textContent = '0';
+      populateDhakaDistricts();
+      renderSelectRequirementsBoardPrompt();
+      return;
+    }
+
+    if (requirementsCache[boardKey]) {
+      setLoadedRequirementsData(requirementsCache[boardKey]);
+      return;
+    }
 
     try {
-      showDhakaLoadingState();
+      isLoadingRequirementsBoard = true;
+      showDhakaLoadingState(boardKey);
 
-      const response = await fetch('./data/dhaka_colleges.json');
-      if (!response.ok) {
-        throw new Error(`Failed to load Dhaka Board dataset (${response.status} ${response.statusText})`);
+      let dataUrl = '';
+      if (boardKey === 'ALL') {
+        dataUrl = './data/requirements/all_colleges.json';
+      } else {
+        dataUrl = `./data/requirements/${boardKey.toLowerCase()}.json`;
       }
-      const rawDhaka = await response.json();
+
+      const response = await fetch(dataUrl);
+      if (!response.ok) {
+        throw new Error(`Failed to load seat requirements for ${boardKey} (${response.status} ${response.statusText})`);
+      }
+
+      let rawData = await response.json();
 
       // Hardcoded Exclusion: Never display Hermann Gmeiner / SOS Hermann Gmeiner / EIIN 108215
-      dhakaCollegesData = rawDhaka.filter(c => {
+      rawData = rawData.filter(c => {
         if (!c) return false;
         const eiin = String(c.eiin || '').trim();
         const name = String(c.name || '').toUpperCase();
@@ -1107,20 +1151,63 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
       });
 
-      isDhakaInitialized = true;
-
-      populateDhakaDistricts();
-      setupDhakaEventListeners();
-      applyDhakaFiltersAndRender();
+      requirementsCache[boardKey] = rawData;
+      setLoadedRequirementsData(rawData);
     } catch (err) {
-      console.error('Dhaka Board initialization error:', err);
+      console.error(`Error loading seat requirements for board ${boardKey}:`, err);
       showDhakaErrorState(err.message);
+    } finally {
+      isLoadingRequirementsBoard = false;
     }
   }
 
+  function setLoadedRequirementsData(data) {
+    dhakaCollegesData = data;
+    dhakaCurrentPage = 1;
+    populateDhakaDistricts();
+    applyDhakaFiltersAndRender();
+  }
+
+  function updateDhakaBoardQuickChipsUI() {
+    dhakaBoardQuickChips.forEach(btn => {
+      if (btn.dataset.reqBoard === dhakaState.board) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  function renderSelectRequirementsBoardPrompt() {
+    dhakaCollegesGrid.innerHTML = `
+      <div class="no-results select-board-prompt">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-emerald); margin-bottom: 12px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+        <h3>Please Select an Education Board</h3>
+        <p>Choose your Education Board from the dropdown or quick chips above to view official Class XI seat capacities and minimum GPA cutoff requirements.</p>
+      </div>
+    `;
+  }
+
   function populateDhakaDistricts() {
-    const districts = setSortedUnique(dhakaCollegesData.map(c => c.zilla));
-    dhakaDistrictFilter.innerHTML = '<option value="ALL">All Dhaka Districts (15 Zillas)</option>';
+    const activeBoard = dhakaState.board;
+    if (activeBoard === 'NONE') {
+      dhakaDistrictFilter.innerHTML = '<option value="ALL">Select Board First</option>';
+      dhakaThanaFilter.innerHTML = '<option value="ALL">Select District First</option>';
+      dhakaDistrictFilter.disabled = true;
+      dhakaThanaFilter.disabled = true;
+      return;
+    }
+
+    dhakaDistrictFilter.disabled = false;
+    dhakaThanaFilter.disabled = false;
+
+    let relevant = dhakaCollegesData;
+    if (activeBoard !== 'ALL') {
+      relevant = dhakaCollegesData.filter(c => (c.board || '').toUpperCase() === activeBoard.toUpperCase());
+    }
+
+    const districts = setSortedUnique(relevant.map(c => c.zilla));
+    dhakaDistrictFilter.innerHTML = '<option value="ALL">All Districts (Select to Filter)</option>';
     const fragment = document.createDocumentFragment();
     districts.forEach(d => {
       const opt = document.createElement('option');
@@ -1134,10 +1221,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function populateDhakaThanas() {
+    const activeBoard = dhakaState.board;
     const activeDistrict = dhakaState.district;
+
+    if (activeBoard === 'NONE' || !activeDistrict) {
+      dhakaThanaFilter.innerHTML = '<option value="ALL">All Thanas</option>';
+      return;
+    }
+
     let relevant = dhakaCollegesData;
+    if (activeBoard !== 'ALL') {
+      relevant = relevant.filter(c => (c.board || '').toUpperCase() === activeBoard.toUpperCase());
+    }
     if (activeDistrict !== 'ALL') {
-      relevant = relevant.filter(c => c.zilla.toUpperCase() === activeDistrict.toUpperCase());
+      relevant = relevant.filter(c => (c.zilla || '').toUpperCase() === activeDistrict.toUpperCase());
     }
 
     const thanas = setSortedUnique(relevant.map(c => c.thana));
@@ -1153,6 +1250,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setupDhakaEventListeners() {
+    // Board Dropdown
+    if (dhakaBoardFilter) {
+      dhakaBoardFilter.addEventListener('change', (e) => {
+        dhakaState.district = 'ALL';
+        dhakaState.thana = 'ALL';
+        loadRequirementsBoardData(e.target.value);
+      });
+    }
+
+    // Board Quick Chips
+    dhakaBoardQuickChips.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const b = btn.dataset.reqBoard;
+        dhakaState.district = 'ALL';
+        dhakaState.thana = 'ALL';
+        loadRequirementsBoardData(b);
+      });
+    });
+
     const debouncedDhakaSearch = debounce((val) => {
       dhakaState.searchQuery = val.trim().toLowerCase();
       dhakaCurrentPage = 1;
@@ -1270,7 +1386,13 @@ document.addEventListener('DOMContentLoaded', () => {
         tab.classList.add('active');
         const grp = tab.dataset.dhakaGroup;
         dhakaState.group = grp;
-        dhakaGroupFilter.value = grp;
+        if (dhakaGroupFilter) {
+          if (grp === 'Madrasah') {
+            dhakaGroupFilter.value = 'ALL';
+          } else {
+            dhakaGroupFilter.value = grp;
+          }
+        }
         dhakaCurrentPage = 1;
         applyDhakaFiltersAndRender();
       });
@@ -1299,10 +1421,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     dhakaResetBtn.addEventListener('click', resetDhakaFilters);
 
-    dhakaModalClose.addEventListener('click', closeDhakaModal);
-    dhakaDetailModal.addEventListener('click', (e) => {
-      if (e.target === dhakaDetailModal) closeDhakaModal();
-    });
+    if (dhakaModalClose) dhakaModalClose.addEventListener('click', closeDhakaModal);
+    if (dhakaDetailModal) {
+      dhakaDetailModal.addEventListener('click', (e) => {
+        if (e.target === dhakaDetailModal) closeDhakaModal();
+      });
+    }
   }
 
   function updateActiveGpaChips() {
@@ -1337,18 +1461,20 @@ document.addEventListener('DOMContentLoaded', () => {
     dhakaState.medium = 'ALL';
     dhakaState.sort = 'gpa_desc';
 
-    dhakaSearchInput.value = '';
-    dhakaGpaInput.value = '';
-    dhakaOnlyEligibleToggle.checked = false;
-    dhakaDistrictFilter.value = 'ALL';
-    dhakaThanaFilter.value = 'ALL';
-    dhakaGenderFilter.value = 'ALL';
-    dhakaGroupFilter.value = 'ALL';
-    dhakaShiftFilter.value = 'ALL';
-    dhakaMediumFilter.value = 'ALL';
-    dhakaSortFilter.value = 'gpa_desc';
-    dhakaEntriesPerPageSelect.value = '20';
-    dhakaEntriesPerPage = 20;
+    if (dhakaSearchInput) dhakaSearchInput.value = '';
+    if (dhakaGpaInput) dhakaGpaInput.value = '';
+    if (dhakaOnlyEligibleToggle) dhakaOnlyEligibleToggle.checked = false;
+    if (dhakaDistrictFilter) dhakaDistrictFilter.value = 'ALL';
+    if (dhakaThanaFilter) dhakaThanaFilter.value = 'ALL';
+    if (dhakaGenderFilter) dhakaGenderFilter.value = 'ALL';
+    if (dhakaGroupFilter) dhakaGroupFilter.value = 'ALL';
+    if (dhakaShiftFilter) dhakaShiftFilter.value = 'ALL';
+    if (dhakaMediumFilter) dhakaMediumFilter.value = 'ALL';
+    if (dhakaSortFilter) dhakaSortFilter.value = 'gpa_desc';
+    if (dhakaEntriesPerPageSelect) {
+      dhakaEntriesPerPageSelect.value = '20';
+      dhakaEntriesPerPage = 20;
+    }
     dhakaCurrentPage = 1;
 
     populateDhakaThanas();
@@ -1375,56 +1501,76 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function applyDhakaFiltersAndRender() {
-    if (!dhakaCollegesData || dhakaCollegesData.length === 0) return;
+    if (dhakaState.board === 'NONE') {
+      renderSelectRequirementsBoardPrompt();
+      if (dhakaVisibleCount) dhakaVisibleCount.textContent = '0';
+      if (dhakaVisibleSeats) dhakaVisibleSeats.textContent = '0';
+      return;
+    }
+
+    if (!dhakaCollegesData || dhakaCollegesData.length === 0) {
+      renderSelectRequirementsBoardPrompt();
+      return;
+    }
 
     let result = [...dhakaCollegesData];
 
     // District Filter
     if (dhakaState.district !== 'ALL') {
-      result = result.filter(c => c.zilla.toUpperCase() === dhakaState.district.toUpperCase());
+      result = result.filter(c => (c.zilla || '').toUpperCase() === dhakaState.district.toUpperCase());
     }
 
     // Thana Filter
     if (dhakaState.thana !== 'ALL') {
-      result = result.filter(c => c.thana.toUpperCase() === dhakaState.thana.toUpperCase());
+      result = result.filter(c => (c.thana || '').toUpperCase() === dhakaState.thana.toUpperCase());
     }
 
     // Search query
     if (dhakaState.searchQuery) {
       const q = dhakaState.searchQuery;
       result = result.filter(c => 
-        c.name.toLowerCase().includes(q) ||
-        String(c.eiin).includes(q) ||
-        c.thana.toLowerCase().includes(q) ||
-        c.zilla.toLowerCase().includes(q)
+        (c.name || '').toLowerCase().includes(q) ||
+        String(c.eiin || '').includes(q) ||
+        (c.thana || '').toLowerCase().includes(q) ||
+        (c.zilla || '').toLowerCase().includes(q) ||
+        (c.board_name || c.board || '').toLowerCase().includes(q)
       );
     }
 
     // Filter by offers matching criteria
     result = result.filter(c => {
+      if (!c.offers || c.offers.length === 0) return false;
+
       const matchingOffers = c.offers.filter(offer => {
         // Group filter
-        if (dhakaState.group !== 'ALL' && offer.group.toUpperCase() !== dhakaState.group.toUpperCase()) {
-          return false;
+        if (dhakaState.group !== 'ALL') {
+          if (dhakaState.group === 'Madrasah') {
+            const mGroups = ['GENERAL', 'SCIENCE (MADRASHA)', 'ISLAMIC STUDIES', 'MUZZABID', 'HOME SCIENCE', 'MUSIC'];
+            if (!mGroups.includes((offer.group || '').toUpperCase())) {
+              return false;
+            }
+          } else if ((offer.group || '').toUpperCase() !== dhakaState.group.toUpperCase()) {
+            return false;
+          }
         }
 
         // Shift filter
-        if (dhakaState.shift !== 'ALL' && offer.shift.toUpperCase() !== dhakaState.shift.toUpperCase()) {
+        if (dhakaState.shift !== 'ALL' && (offer.shift || '').toUpperCase() !== dhakaState.shift.toUpperCase()) {
           return false;
         }
 
         // Medium filter
-        if (dhakaState.medium !== 'ALL' && offer.medium.toUpperCase() !== dhakaState.medium.toUpperCase()) {
+        if (dhakaState.medium !== 'ALL' && (offer.medium || '').toUpperCase() !== dhakaState.medium.toUpperCase()) {
           return false;
         }
 
         // Gender filter logic
         if (dhakaState.gender === 'Male') {
-          if (offer.gender !== 'Male' && offer.gender !== 'Combined') return false;
+          if (offer.gender !== 'Male' && offer.gender !== 'Co-educational' && offer.gender !== 'Combined') return false;
         } else if (dhakaState.gender === 'Female') {
-          if (offer.gender !== 'Female' && offer.gender !== 'Combined') return false;
+          if (offer.gender !== 'Female' && offer.gender !== 'Co-educational' && offer.gender !== 'Combined') return false;
         } else if (dhakaState.gender === 'Combined') {
-          if (offer.gender !== 'Combined') return false;
+          if (offer.gender !== 'Co-educational' && offer.gender !== 'Combined') return false;
         } else if (dhakaState.gender === 'MaleOnly') {
           if (offer.gender !== 'Male') return false;
         } else if (dhakaState.gender === 'FemaleOnly') {
@@ -1463,9 +1609,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dhakaFilteredData = result;
 
     // Update stats counters
-    const totalApprovedSeats = dhakaFilteredData.reduce((sum, c) => sum + c.total_seat, 0);
-    dhakaVisibleCount.textContent = dhakaFilteredData.length.toLocaleString();
-    dhakaVisibleSeats.textContent = totalApprovedSeats.toLocaleString();
+    const totalApprovedSeats = dhakaFilteredData.reduce((sum, c) => sum + (c.total_seat || 0), 0);
+    if (dhakaVisibleCount) dhakaVisibleCount.textContent = dhakaFilteredData.length.toLocaleString();
+    if (dhakaVisibleSeats) dhakaVisibleSeats.textContent = totalApprovedSeats.toLocaleString();
 
     renderDhakaFilterTags();
     updateDhakaPaginationUI();
@@ -1473,12 +1619,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderDhakaFilterTags() {
+    if (!dhakaActiveFilterTags) return;
     const tags = [];
+    if (dhakaState.board !== 'NONE') {
+      tags.push(`Board: ${dhakaState.board}`);
+    }
     if (dhakaState.gpa !== null) {
       tags.push(`Candidate GPA: ${dhakaState.gpa.toFixed(2)}`);
     }
     if (dhakaState.onlyEligible) {
-      tags.push(`Filter: Only Eligible (2025 Cutoffs)`);
+      tags.push(`Filter: Only Eligible`);
     }
     if (dhakaState.district !== 'ALL') {
       tags.push(`Zilla: ${dhakaState.district}`);
@@ -1535,8 +1685,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (batch.length === 0) {
       dhakaCollegesGrid.innerHTML = `
         <div class="no-results">
-          <h3>No Dhaka Colleges Found</h3>
-          <p>Try lowering the GPA benchmark, clearing gender/shift filters, or selecting All Districts.</p>
+          <h3>No Colleges Found Matching Your Filters</h3>
+          <p>Try lowering the candidate GPA, clearing gender/shift filters, or choosing another district.</p>
         </div>
       `;
       return;
@@ -1545,10 +1695,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const candidateGpa = dhakaState.gpa;
 
     const html = batch.map(college => {
-      // Min GPA display range
-      const gpaDisplay = college.min_gpa_lowest === college.min_gpa_highest 
-        ? `GPA ${college.min_gpa_lowest.toFixed(2)}` 
-        : `GPA ${college.min_gpa_lowest.toFixed(2)} &ndash; ${college.min_gpa_highest.toFixed(2)}`;
+      // Min / Max GPA display block
+      let gpaMetricHtml = '';
+      if (college.min_gpa_lowest === college.min_gpa_highest) {
+        gpaMetricHtml = `
+          <div class="dhaka-metric-block gpa-single-block">
+            <span class="dhaka-metric-val green-val">GPA ${college.min_gpa_lowest.toFixed(2)}</span>
+            <span class="dhaka-metric-lbl">2025 Min Cutoff</span>
+          </div>
+        `;
+      } else {
+        gpaMetricHtml = `
+          <div class="dhaka-metric-block gpa-range-block">
+            <div class="gpa-range-split">
+              <div class="gpa-split-col">
+                <span class="gpa-split-num green-val">${college.min_gpa_lowest.toFixed(2)}</span>
+                <span class="gpa-split-tag">MIN</span>
+              </div>
+              <span class="gpa-split-sep">&ndash;</span>
+              <div class="gpa-split-col">
+                <span class="gpa-split-num green-val">${college.min_gpa_highest.toFixed(2)}</span>
+                <span class="gpa-split-tag">MAX</span>
+              </div>
+            </div>
+            <span class="dhaka-metric-lbl">2025 Cutoff Range</span>
+          </div>
+        `;
+      }
 
       // Calculate candidate eligibility if GPA is provided
       let eligibilityAlertHtml = '';
@@ -1586,9 +1759,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const offersHtml = displayedOffers.map(offer => {
         let groupClass = 'group-other';
-        if (offer.group === 'Science') groupClass = 'group-sc';
-        else if (offer.group === 'Business Studies') groupClass = 'group-cm';
-        else if (offer.group === 'Humanities') groupClass = 'group-hu';
+        const grp = (offer.group || '').toUpperCase();
+        if (grp === 'SCIENCE') groupClass = 'group-sc';
+        else if (grp === 'BUSINESS STUDIES') groupClass = 'group-cm';
+        else if (grp === 'HUMANITIES') groupClass = 'group-hu';
+        else if (grp.includes('MADRASHA') || grp === 'GENERAL' || grp === 'ISLAMIC STUDIES') groupClass = 'group-madrasah';
 
         let isEligible = true;
         if (candidateGpa !== null) {
@@ -1613,6 +1788,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }).join('');
 
+      const boardTagText = college.board_name ? `${college.board_name} Board` : (college.board ? `${college.board} Board` : 'Education Board');
+
       return `
         <article class="dhaka-card" data-eiin="${college.eiin}">
           <div>
@@ -1620,7 +1797,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div>
                 <h3 class="dhaka-card-title">${escapeHTML(college.name)}</h3>
                 <div class="dhaka-card-location">
-                  ${escapeHTML(college.thana)}, ${escapeHTML(college.zilla)} (Dhaka Board)
+                  ${escapeHTML(college.thana)}, ${escapeHTML(college.zilla)} (${escapeHTML(boardTagText)})
                 </div>
                 <div class="dhaka-card-tags">
                   <span class="dhaka-eiin-badge">EIIN: ${college.eiin}</span>
@@ -1636,10 +1813,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="dhaka-metric-val">${college.total_seat.toLocaleString()}</span>
                 <span class="dhaka-metric-lbl">Approved Seats</span>
               </div>
-              <div class="dhaka-metric-block">
-                <span class="dhaka-metric-val green-val">${gpaDisplay}</span>
-                <span class="dhaka-metric-lbl">2025 Min GPA Cutoff</span>
-              </div>
+              ${gpaMetricHtml}
               <div class="dhaka-metric-block">
                 <span class="dhaka-metric-val cyan-val">${college.offers.length}</span>
                 <span class="dhaka-metric-lbl">Course Streams</span>
@@ -1674,7 +1848,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#dhakaCollegesGrid .btn-dhaka-details[data-dhaka-eiin]').forEach(btn => {
         btn.addEventListener('click', () => {
           const eiin = btn.dataset.dhakaEiin;
-          const college = dhakaCollegesData.find(c => c.eiin === eiin);
+          const college = dhakaCollegesData.find(c => String(c.eiin) === String(eiin));
           if (college) openDhakaModal(college);
         });
       });
@@ -1683,8 +1857,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openDhakaModal(college) {
     dhakaModalTitle.textContent = college.name;
-    dhakaModalSubtitle.textContent = `Thana: ${college.thana} • District: ${college.zilla} • Dhaka Board`;
+    const boardTagText = college.board_name ? `${college.board_name} Board` : (college.board ? `${college.board} Board` : 'Education Board');
+    dhakaModalSubtitle.textContent = `Thana: ${college.thana} • District: ${college.zilla} • ${boardTagText}`;
     dhakaModalEiinTag.textContent = `EIIN: ${college.eiin}`;
+    if (dhakaModalBoardTag) {
+      dhakaModalBoardTag.textContent = `${(college.board_name || college.board || 'BANGLADESH').toUpperCase()} EDUCATION BOARD • 2025 BENCHMARK ARCHIVE`;
+    }
 
     const candidateGpa = dhakaState.gpa;
 
@@ -1698,6 +1876,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ? (isEligible ? '<span class="status-badge-eligible">✓ Meets Cutoff</span>' : '<span class="status-badge-ineligible">✗ Below Cutoff</span>')
         : '<span class="dhaka-spec-chip">2025 Archive</span>';
 
+      const ownGpaStr = o.own_min_gpa && o.own_min_gpa > 0 ? `GPA ${o.own_min_gpa.toFixed(2)}` : '—';
+      const sqStr = o.sq_seats && o.sq_seats > 0 ? `${o.sq_seats} (Min ${o.sq_min_gpa ? o.sq_min_gpa.toFixed(2) : '—'})` : '—';
+
       return `
         <tr class="${rowClass}">
           <td><strong>${idx + 1}</strong></td>
@@ -1706,7 +1887,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${escapeHTML(o.shift)}</td>
           <td>${escapeHTML(o.gender)}</td>
           <td><strong style="color: var(--accent-amber);">GPA ${o.min_gpa.toFixed(2)}</strong></td>
+          <td>${ownGpaStr}</td>
           <td><strong style="color: var(--accent-emerald);">${o.total_seat}</strong></td>
+          <td>${sqStr}</td>
           <td>${statusBadge}</td>
         </tr>
       `;
@@ -1715,7 +1898,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dhakaModalBody.innerHTML = `
       <div class="dhaka-modal-notice-bar">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-        <span><strong>Historical Reference (2025 Archive)</strong>: Statistics and cutoffs reflect the previous admission batch. Current criteria are determined by college authorities and Board circulars.</span>
+        <span><strong>Historical Reference (2025 Archive)</strong>: Statistics and cutoffs reflect the previous admission batch from official Board circulars. Formal application choices must be submitted via <strong>xiclassadmission.gov.bd</strong>.</span>
       </div>
 
       <div class="modal-dashboard-grid" style="margin-bottom: 20px;">
@@ -1746,9 +1929,11 @@ document.addEventListener('DOMContentLoaded', () => {
               <th>Version</th>
               <th>Shift</th>
               <th>Gender</th>
-              <th>2025 Min GPA Cutoff</th>
+              <th>2025 Min GPA</th>
+              <th>Own Student GPA</th>
               <th>Approved Seats</th>
-              <th>Your Eligibility (2025 Benchmark)</th>
+              <th>Special Quota (SQ)</th>
+              <th>Your Eligibility</th>
             </tr>
           </thead>
           <tbody>
@@ -1769,10 +1954,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  function showDhakaLoadingState() {
+  function showDhakaLoadingState(boardKey) {
+    const label = boardKey === 'ALL' ? 'full national seat catalog (7,734 institutions &bull; 2.6M+ seats)...' : `${boardKey || 'Board'} seat requirements chunk...`;
     dhakaCollegesGrid.innerHTML = `
       <div class="no-results">
-        <p>Loading official Dhaka Board 2025 admission requirements matrix...</p>
+        <p>⚡ Fetching lightweight ${label}</p>
       </div>
     `;
   }
@@ -1780,7 +1966,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function showDhakaErrorState(msg) {
     dhakaCollegesGrid.innerHTML = `
       <div class="no-results" style="color: var(--accent-red);">
-        <h3>Error Loading Dhaka Dataset</h3>
+        <h3>Error Loading Dataset</h3>
         <p>${escapeHTML(msg)}</p>
       </div>
     `;

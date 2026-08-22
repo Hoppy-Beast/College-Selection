@@ -18,14 +18,15 @@ An editorial, high-performance web platform designed and owned by **MD. Mahinur 
 
 ---
 
-## ✨ Key Features (v5.0 Edition)
+## ✨ Key Features (v6.0 Edition)
 
-- ⚡ **On-Demand Board Chunk Loading**: Initial page load downloads **0 KB** of college data. When a user selects a board (e.g. Dhaka, Rajshahi, Chittagong), only the required lightweight board chunk (~200 KB – ~790 KB) is fetched with instant in-memory caching (saving **85% to 96%** bandwidth).
-- 🔘 **Quick Board Selector Chips**: 1-click quick board selection bar directly inside the filter panel (`[ Dhaka ] [ Rajshahi ] [ Chittagong ] ...`).
+- ⚡ **Dual-Module On-Demand Board Chunk Loading**: Initial page load downloads **0 KB** of college or seat data. When a user selects any Education Board, only the required lightweight board chunk is fetched with instant in-memory caching (saving **85% to 96%** bandwidth).
+- 🔘 **Quick Board Selector Chips**: 1-click quick board selection bar directly inside the filter panels across both analytical and requirements modules (`[ Dhaka ] [ Rajshahi ] [ Chittagong ] ...`).
 - 📊 **Multi-Sort Priority Builder**: Add up to 3 priority rankings (e.g. GPA-5 Rate &rarr; Total Examinees &rarr; Pass Rate) with stream-aware logic and 2-decimal precision tie-breaking.
-- 🏛️ **Dedicated Dhaka Board 2025 Benchmark Archive**: Independent search tool with Minimum GPA requirements and approved seat capacity data across 1,185 institutions from the official Dhaka Education Board archive.
+- 🏛️ **All Boards Class XI Minimum GPA & Seat Capacity Benchmark (2025 Archive)**: Independent search and candidate matcher tool with minimum GPA cutoff requirements and approved seat capacity data across **7,734 institutions (2.6M+ approved seats)** spanning all 10 Education Boards.
+- 🎯 **Candidate SSC GPA Benchmark Matcher**: Enter your exact SSC GPA (0.00 - 5.00) to automatically verify eligibility across all course streams, highlight qualifying institutions, and toggle *"Show ONLY Institutions Where GPA &ge; Required Min GPA"*.
 - 🎨 **High-Contrast Editorial Design System**: Designed using **Space Grotesk** and **Plus Jakarta Sans**, sharp structural boundaries, high-contrast dark carbon theme, and zero emojis.
-- 🇧🇩 **Nationwide Coverage (7,400+ Audited Colleges)**: Complete coverage across all 10 Education Boards (Dhaka, Rajshahi, Chittagong, Comilla, Sylhet, Barisal, Dinajpur, Jessore, Mymensingh, Madrasah).
+- 🇧🇩 **Comprehensive Nationwide Coverage**: Complete coverage across all 10 Education Boards (Dhaka, Rajshahi, Chittagong, Comilla, Sylhet, Barisal, Dinajpur, Jessore, Mymensingh, Madrasah).
 
 ---
 
@@ -79,29 +80,25 @@ git push -u origin main
 
 When new batch results or seat lists are published by the Education Boards, follow these simple steps to update the live platform:
 
-### Step 1: Scrape Official Results
+### Step 1: Scrape Official Results (Exam Performance)
 Run the high-speed multi-threaded scraper:
 ```bash
 python scraper.py
 ```
 
-### Step 2: Compile & Validate the National Dataset
+### Step 2: Compile & Split Board Chunks (Exam Performance)
 ```bash
 python build_full_dataset.py
-```
-
-### Step 3: Split into Lightweight Board Chunks
-```bash
 python build_board_chunks.py
 ```
 
-### Step 4: Update Dhaka Board Benchmark Dataset
-Place the newly downloaded Excel file in the `data/` folder and run:
+### Step 3: Scrape & Build All Boards Class XI Seat Requirements
+Place all official PDF circulars in `all-boards/` (e.g. `ঢাকা_.pdf`, `রাজশাহী_.pdf`, etc.) and run:
 ```bash
-python build_dhaka_dataset.py
+python build_requirements_dataset.py
 ```
 
-### Step 5: Deploy Updates to GitHub Pages
+### Step 4: Deploy Updates to GitHub Pages
 ```bash
 git add .
 git commit -m "Update college datasets for new academic batch"
@@ -113,30 +110,42 @@ git push origin main
 ## 📁 Repository File Map
 
 ```
-├── index.html                  # Main application markup & UI structure
+├── index.html                  # Main application markup & dual-mode UI structure
 ├── style.css                   # High-contrast editorial design system
 ├── app.js                      # Dual-module app logic & on-demand chunk loader
 ├── assets/                     # Logos, favicon, and preview media (preview.png, logo.png)
+├── all-boards/                 # Official source PDFs for all 10 Education Boards
+│   ├── ঢাকা_.pdf               # Dhaka Board official circular
+│   ├── রাজশাহী_.pdf            # Rajshahi Board official circular
+│   ├── চট্টগ্রাম_.pdf           # Chittagong Board official circular
+│   ├── কুমিল্লা_.pdf            # Comilla Board official circular
+│   ├── সিলেট_.pdf              # Sylhet Board official circular
+│   ├── বরিশাল_.pdf             # Barisal Board official circular
+│   ├── দিনাজপুর_.pdf           # Dinajpur Board official circular
+│   ├── যশোর_.pdf              # Jessore Board official circular
+│   ├── ময়মনসিংহ_.pdf           # Mymensingh Board official circular
+│   └── মাদ্রাসা_.pdf            # Madrasah Board official circular
 ├── data/
-│   ├── boards/                 # 10 Lightweight board JSON chunks + manifest.json
-│   │   ├── dhaka.json          # Dhaka Board (1,076 colleges)
-│   │   ├── rajshahi.json       # Rajshahi Board (754 colleges)
-│   │   ├── chittagong.json     # Chittagong Board (281 colleges)
-│   │   ├── comilla.json        # Comilla Board (455 colleges)
-│   │   ├── sylhet.json         # Sylhet Board (323 colleges)
-│   │   ├── barisal.json        # Barisal Board (349 colleges)
-│   │   ├── dinajpur.json       # Dinajpur Board (667 colleges)
-│   │   ├── jessore.json        # Jessore Board (575 colleges)
-│   │   ├── mymensingh.json     # Mymensingh Board (306 colleges)
-│   │   ├── madrasah.json       # Madrasah Board (2,687 institutions)
-│   │   └── manifest.json       # Chunk registry & metadata manifest
-│   ├── dhaka_colleges.json     # Dhaka Board 2025 benchmark dataset (1,185 colleges)
-│   ├── colleges.json           # Complete national database (7,473 institutions)
-│   └── Board of Intermediate...xlsx # Raw official Dhaka Board dataset
+│   ├── boards/                 # Module 1: Academic analytics board chunks
+│   ├── requirements/           # Module 2: All 10 boards seat & GPA cutoff chunks
+│   │   ├── dhaka.json          # Dhaka Board (1,121 colleges • 518,106 seats)
+│   │   ├── rajshahi.json       # Rajshahi Board (809 colleges • 386,670 seats)
+│   │   ├── dinajpur.json       # Dinajpur Board (703 colleges • 327,410 seats)
+│   │   ├── jessore.json        # Jessore Board (588 colleges • 220,489 seats)
+│   │   ├── comilla.json        # Comilla Board (460 colleges • 257,510 seats)
+│   │   ├── barisal.json        # Barisal Board (364 colleges • 156,898 seats)
+│   │   ├── sylhet.json         # Sylhet Board (330 colleges • 138,735 seats)
+│   │   ├── mymensingh.json     # Mymensingh Board (306 colleges • 130,745 seats)
+│   │   ├── chittagong.json     # Chittagong Board (279 colleges • 168,379 seats)
+│   │   ├── madrasah.json       # Madrasah Board (2,774 institutions • 309,255 seats)
+│   │   ├── all_colleges.json   # Combined national seat requirements catalog (7,734 institutions)
+│   │   └── manifest.json       # Requirements manifest registry & summary metrics
+│   ├── colleges.json           # Complete national academic database
+│   └── dhaka_colleges.json     # Backwards-compatible Dhaka dataset
 ├── scraper.py                  # High-speed multi-threaded board result scraper
 ├── build_full_dataset.py       # Data compiler and aggregation pipeline
 ├── build_board_chunks.py       # Splits colleges.json into on-demand board chunks
-├── build_dhaka_dataset.py      # Parses Dhaka Board Excel into dhaka_colleges.json
+├── build_requirements_dataset.py # Scrapes all-boards/*.pdf into data/requirements/*.json
 ├── .nojekyll                   # Bypasses Jekyll for static asset serving on GitHub Pages
 ├── .gitignore                  # Git ignore configuration
 └── README.md                   # Project documentation & guides
